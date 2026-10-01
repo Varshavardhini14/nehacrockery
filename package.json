@@ -1,0 +1,13 @@
+{
+  "name": "neha-crockery-house",
+  "version": "1.0.0",
+  "description": "Neha Crockery House — Premium Glassware & Crockery Wholesaler, Park Town Chennai",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.4.0"
+  }
+}

@@ -1,0 +1,266 @@
+// ─────────────────────────────────────────────────────────────────────────────
+// NEHA CROCKERY HOUSE — PRISMA SCHEMA
+// PostgreSQL Database for Product Catalogue Management
+// ─────────────────────────────────────────────────────────────────────────────
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ─── ENUMS ───────────────────────────────────────────────────────────────────
+
+enum UserRole {
+  SUPER_ADMIN
+  ADMIN
+  STAFF
+}
+
+enum CustomerType {
+  RETAILER
+  WHOLESALER
+  HOTEL
+  RESTAURANT
+  INSTITUTION
+  INDIVIDUAL
+  OTHER
+}
+
+enum EnquiryStatus {
+  NEW
+  CONTACTED
+  IN_PROGRESS
+  COMPLETED
+  CLOSED
+}
+
+enum CatalogueRequestStatus {
+  NEW
+  SENT
+  CLOSED
+}
+
+// ─── MODELS ──────────────────────────────────────────────────────────────────
+
+model User {
+  id           String    @id @default(cuid())
+  name         String
+  email        String    @unique
+  passwordHash String    @map("password_hash")
+  role         UserRole  @default(STAFF)
+  isActive     Boolean   @default(true) @map("is_active")
+  lastLogin    DateTime? @map("last_login")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+
+  @@map("users")
+}
+
+model Category {
+  id          String     @id @default(cuid())
+  name        String
+  slug        String     @unique
+  description String?
+  image       String?
+  parentId    String?    @map("parent_id")
+  parent      Category?  @relation("CategoryHierarchy", fields: [parentId], references: [id])
+  children    Category[] @relation("CategoryHierarchy")
+  sortOrder   Int        @default(0) @map("sort_order")
+  isActive    Boolean    @default(true) @map("is_active")
+  products    Product[]
+  createdAt   DateTime   @default(now()) @map("created_at")
+  updatedAt   DateTime   @updatedAt @map("updated_at")
+
+  @@index([parentId])
+  @@index([slug])
+  @@index([isActive])
+  @@map("categories")
+}
+
+model Brand {
+  id          String    @id @default(cuid())
+  name        String
+  slug        String    @unique
+  logo        String?
+  description String?
+  website     String?
+  isOwnBrand  Boolean   @default(false) @map("is_own_brand")
+  sortOrder   Int       @default(0) @map("sort_order")
+  isActive    Boolean   @default(true) @map("is_active")
+  products    Product[]
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  @@index([slug])
+  @@index([isActive])
+  @@map("brands")
+}
+
+model Product {
+  id                   String         @id @default(cuid())
+  name                 String
+  slug                 String         @unique
+  productCode          String?        @unique @map("product_code")
+  description          String?
+  brandId              String?        @map("brand_id")
+  brand                Brand?         @relation(fields: [brandId], references: [id], onDelete: SetNull)
+  categoryId           String?        @map("category_id")
+  category             Category?      @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  material             String?
+  capacity             String?
+  dimensions           String?
+  setContents          String?        @map("set_contents")
+  piecesPerSet         Int?           @map("pieces_per_set")
+  packagingInformation String?        @map("packaging_information")
+  features             String[]
+  mrp                  Decimal?       @db.Decimal(10, 2)
+  isFeatured           Boolean        @default(false) @map("is_featured")
+  isNewArrival         Boolean        @default(false) @map("is_new_arrival")
+  isActive             Boolean        @default(true) @map("is_active")
+  seoTitle             String?        @map("seo_title")
+  seoDescription       String?        @map("seo_description")
+  images               ProductImage[]
+  enquiries            Enquiry[]
+  createdAt            DateTime       @default(now()) @map("created_at")
+  updatedAt            DateTime       @updatedAt @map("updated_at")
+
+  @@index([slug])
+  @@index([categoryId])
+  @@index([brandId])
+  @@index([isActive])
+  @@index([isFeatured])
+  @@index([isNewArrival])
+  @@index([productCode])
+  @@map("products")
+}
+
+model ProductImage {
+  id        String   @id @default(cuid())
+  productId String   @map("product_id")
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  imageUrl  String   @map("image_url")
+  altText   String?  @map("alt_text")
+  sortOrder Int      @default(0) @map("sort_order")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([productId])
+  @@map("product_images")
+}
+
+model Enquiry {
+  id           String        @id @default(cuid())
+  name         String
+  companyName  String?       @map("company_name")
+  phone        String
+  email        String?
+  customerType CustomerType  @default(INDIVIDUAL) @map("customer_type")
+  message      String?
+  productId    String?       @map("product_id")
+  product      Product?      @relation(fields: [productId], references: [id], onDelete: SetNull)
+  quantity     String?
+  source       String?       @default("website")
+  status       EnquiryStatus @default(NEW)
+  createdAt    DateTime      @default(now()) @map("created_at")
+  updatedAt    DateTime      @updatedAt @map("updated_at")
+
+  @@index([status])
+  @@index([customerType])
+  @@index([productId])
+  @@index([createdAt])
+  @@map("enquiries")
+}
+
+model Catalogue {
+  id        String   @id @default(cuid())
+  title     String
+  fileUrl   String   @map("file_url")
+  version   String?
+  isActive  Boolean  @default(true) @map("is_active")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([isActive])
+  @@map("catalogues")
+}
+
+model CatalogueRequest {
+  id           String                 @id @default(cuid())
+  name         String
+  companyName  String?                @map("company_name")
+  phone        String
+  email        String?
+  customerType CustomerType           @default(INDIVIDUAL) @map("customer_type")
+  status       CatalogueRequestStatus @default(NEW)
+  createdAt    DateTime               @default(now()) @map("created_at")
+  updatedAt    DateTime               @updatedAt @map("updated_at")
+
+  @@index([status])
+  @@index([createdAt])
+  @@map("catalogue_requests")
+}
+
+model Review {
+  id           String       @id @default(cuid())
+  customerName String       @map("customer_name")
+  businessName String?      @map("business_name")
+  customerType CustomerType @default(INDIVIDUAL) @map("customer_type")
+  rating       Int          @default(5)
+  reviewText   String       @map("review_text")
+  source       String?
+  isPublished  Boolean      @default(false) @map("is_published")
+  createdAt    DateTime     @default(now()) @map("created_at")
+  updatedAt    DateTime     @updatedAt @map("updated_at")
+
+  @@index([isPublished])
+  @@index([rating])
+  @@map("reviews")
+}
+
+model Banner {
+  id         String   @id @default(cuid())
+  title      String
+  subtitle   String?
+  image      String
+  buttonText String?  @map("button_text")
+  buttonUrl  String?  @map("button_url")
+  sortOrder  Int      @default(0) @map("sort_order")
+  isActive   Boolean  @default(true) @map("is_active")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  @@index([isActive])
+  @@index([sortOrder])
+  @@map("banners")
+}
+
+model SiteSettings {
+  id               String   @id @default(cuid())
+  businessName     String   @map("business_name")
+  tagline          String?
+  phone            String?
+  whatsapp         String?
+  email            String?
+  address          String?
+  warehouseAddress String?  @map("warehouse_address")
+  businessHours    String?  @map("business_hours")
+  googleMapsUrl    String?  @map("google_maps_url")
+  // Social media
+  facebook         String?
+  instagram        String?
+  twitter          String?
+  youtube          String?
+  linkedin         String?
+  // GST & business info
+  gstNumber        String?  @map("gst_number")
+  panNumber        String?  @map("pan_number")
+  // Metadata
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+
+  @@map("site_settings")
+}

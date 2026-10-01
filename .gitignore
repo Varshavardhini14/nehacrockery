@@ -1,0 +1,25 @@
+# ── Node ──────────────────────────────────────────────
+node_modules/
+npm-debug.log*
+
+# ── Build output ───────────────────────────────────────
+dist/
+
+# ── Environment / secrets ─────────────────────────────
+.env
+.env.local
+.env.production
+backend/.env
+
+# ── Logs ──────────────────────────────────────────────
+logs/
+*.log
+
+# ── OS / editor ───────────────────────────────────────
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# ── Uploads (local only) ──────────────────────────────
+backend/uploads/
