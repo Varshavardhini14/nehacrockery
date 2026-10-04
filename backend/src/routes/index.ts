@@ -44,6 +44,9 @@ router.get('/site-settings', siteController.getSiteSettings);
 // ── Catalogues (public — list active) ─────────────────────────────────────────
 router.get('/catalogues', siteController.listCatalogues);
 
+// ── Shop Gallery (public — list active) ───────────────────────────────────────
+router.get('/shop-media', siteController.listShopMedia);
+
 // ── Enquiries (public POST) ───────────────────────────────────────────────────
 router.post('/enquiries', validate(createEnquirySchema), enquiryController.createEnquiry);
 

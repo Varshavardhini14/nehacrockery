@@ -105,3 +105,42 @@ export const uploadImport = multer({
   fileFilter: csvFilter,
   limits: { fileSize: 5 * 1024 * 1024 },
 });
+
+// ── Shop Gallery media (images + videos) ─────────────────────────────────────
+const ALLOWED_MEDIA_TYPES = [
+  'image/jpeg', 'image/jpg', 'image/png', 'image/webp',
+  'video/mp4', 'video/webm', 'video/quicktime',
+];
+
+const shopMediaStorage: StorageEngine = multer.diskStorage({
+  destination: (_req, _file, cb) => {
+    const dir = path.join(process.cwd(), 'uploads', 'shop-gallery');
+    ensureDir(dir);
+    cb(null, dir);
+  },
+  filename: (_req, file, cb) => {
+    const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
+    const ext = path.extname(file.originalname).toLowerCase();
+    const prefix = file.mimetype.startsWith('video/') ? 'video' : 'photo';
+    cb(null, `shop-${prefix}-${uniqueSuffix}${ext}`);
+  },
+});
+
+function shopMediaFilter(
+  _req: Request,
+  file: Express.Multer.File,
+  cb: multer.FileFilterCallback,
+): void {
+  if (ALLOWED_MEDIA_TYPES.includes(file.mimetype)) {
+    cb(null, true);
+  } else {
+    cb(new Error('Only images (JPEG/PNG/WebP) and videos (MP4/WebM/MOV) are allowed'));
+  }
+}
+
+export const uploadShopMedia = multer({
+  storage: shopMediaStorage,
+  fileFilter: shopMediaFilter,
+  limits: { fileSize: 100 * 1024 * 1024, files: 20 }, // 100 MB per file
+});
+

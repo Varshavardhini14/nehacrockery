@@ -1,7 +1,8 @@
-// ─────────────────────────────────────────────────────────────────────────────
-// NEHA CROCKERY HOUSE — PRISMA SCHEMA
-// PostgreSQL Database for Product Catalogue Management
-// ─────────────────────────────────────────────────────────────────────────────
+// =============================================================================
+// NEHA CROCKERY HOUSE - PRISMA SCHEMA
+// Database: PostgreSQL (Supabase)
+// ORM: Prisma 5
+// =============================================================================
 
 generator client {
   provider = "prisma-client-js"
@@ -13,7 +14,7 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-// ─── ENUMS ───────────────────────────────────────────────────────────────────
+// â”€â”€ ENUMS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 enum UserRole {
   SUPER_ADMIN
@@ -45,7 +46,7 @@ enum CatalogueRequestStatus {
   CLOSED
 }
 
-// ─── MODELS ──────────────────────────────────────────────────────────────────
+// â”€â”€ MODELS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 model User {
   id           String    @id @default(cuid())
@@ -111,19 +112,38 @@ model Product {
   brand                Brand?         @relation(fields: [brandId], references: [id], onDelete: SetNull)
   categoryId           String?        @map("category_id")
   category             Category?      @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  // â”€â”€ Physical attributes â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   material             String?
   capacity             String?
   dimensions           String?
+  colourFinish         String?        @map("colour_finish")
   setContents          String?        @map("set_contents")
   piecesPerSet         Int?           @map("pieces_per_set")
+  caseQty              Int?           @map("case_qty")
   packagingInformation String?        @map("packaging_information")
   features             String[]
+  // â”€â”€ Classification â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  collection           String?
+  subcategory          String?
+  // â”€â”€ Pricing â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   mrp                  Decimal?       @db.Decimal(10, 2)
+  catalogueMrp         Decimal?       @db.Decimal(10, 2) @map("catalogue_mrp")
+  wholesalePrice       Decimal?       @db.Decimal(10, 2) @map("wholesale_price")
+  websitePrice         Decimal?       @db.Decimal(10, 2) @map("website_price")
+  priceUnit            String?        @map("price_unit")
+  // â”€â”€ Catalogue traceability â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  cataloguePage        String?        @map("catalogue_page")
+  sourceFile           String?        @map("source_file")
+  reviewStatus         String?        @map("review_status")
+  nameVerified         Boolean?       @map("name_verified")
+  // â”€â”€ Status flags â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   isFeatured           Boolean        @default(false) @map("is_featured")
   isNewArrival         Boolean        @default(false) @map("is_new_arrival")
   isActive             Boolean        @default(true) @map("is_active")
+  // â”€â”€ SEO â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   seoTitle             String?        @map("seo_title")
   seoDescription       String?        @map("seo_description")
+  // â”€â”€ Relations â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   images               ProductImage[]
   enquiries            Enquiry[]
   createdAt            DateTime       @default(now()) @map("created_at")
@@ -136,6 +156,7 @@ model Product {
   @@index([isFeatured])
   @@index([isNewArrival])
   @@index([productCode])
+  @@index([collection])
   @@map("products")
 }
 
@@ -238,6 +259,86 @@ model Banner {
   @@map("banners")
 }
 
+enum SaleStatus {
+  QUOTE
+  CONFIRMED
+  PROCESSING
+  DELIVERED
+  CANCELLED
+}
+
+enum AuditAction {
+  LOGIN
+  LOGOUT
+  CREATE
+  UPDATE
+  DELETE
+  PRICE_CHANGE
+  IMPORT
+  CATALOGUE_UPLOAD
+  HOMEPAGE_CHANGE
+  SALE_CHANGE
+  USER_CHANGE
+  STATUS_CHANGE
+  SETTINGS_CHANGE
+}
+
+model Sale {
+  id          String     @id @default(cuid())
+  saleNumber  String     @unique @map("sale_number")
+  customerName String   @map("customer_name")
+  companyName String?   @map("company_name")
+  phone       String?
+  email       String?
+  notes       String?
+  status      SaleStatus @default(QUOTE)
+  totalAmount Decimal?   @db.Decimal(12, 2) @map("total_amount")
+  items       SaleItem[]
+  createdBy   String?    @map("created_by")
+  createdAt   DateTime   @default(now()) @map("created_at")
+  updatedAt   DateTime   @updatedAt @map("updated_at")
+
+  @@index([status])
+  @@index([createdAt])
+  @@map("sales")
+}
+
+model SaleItem {
+  id          String   @id @default(cuid())
+  saleId      String   @map("sale_id")
+  sale        Sale     @relation(fields: [saleId], references: [id], onDelete: Cascade)
+  productId   String?  @map("product_id")
+  productName String   @map("product_name")
+  productCode String?  @map("product_code")
+  quantity    Int      @default(1)
+  unitPrice   Decimal  @db.Decimal(10, 2) @map("unit_price")
+  total       Decimal  @db.Decimal(12, 2)
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@index([saleId])
+  @@map("sale_items")
+}
+
+model AuditLog {
+  id         String      @id @default(cuid())
+  userId     String?     @map("user_id")
+  userEmail  String?     @map("user_email")
+  userName   String?     @map("user_name")
+  action     AuditAction
+  entity     String?
+  entityId   String?     @map("entity_id")
+  details    String?
+  ipAddress  String?     @map("ip_address")
+  userAgent  String?     @map("user_agent")
+  createdAt  DateTime    @default(now()) @map("created_at")
+
+  @@index([userId])
+  @@index([action])
+  @@index([entity])
+  @@index([createdAt])
+  @@map("audit_logs")
+}
+
 model SiteSettings {
   id               String   @id @default(cuid())
   businessName     String   @map("business_name")
@@ -249,18 +350,33 @@ model SiteSettings {
   warehouseAddress String?  @map("warehouse_address")
   businessHours    String?  @map("business_hours")
   googleMapsUrl    String?  @map("google_maps_url")
-  // Social media
   facebook         String?
   instagram        String?
   twitter          String?
   youtube          String?
   linkedin         String?
-  // GST & business info
   gstNumber        String?  @map("gst_number")
   panNumber        String?  @map("pan_number")
-  // Metadata
   createdAt        DateTime @default(now()) @map("created_at")
   updatedAt        DateTime @updatedAt @map("updated_at")
 
   @@map("site_settings")
+}
+
+// Shop gallery — images & videos uploaded via admin panel, shown on contact page
+model ShopMedia {
+  id          String   @id @default(cuid())
+  title       String?
+  description String?
+  mediaUrl    String   @map("media_url")
+  mediaType   String   @default("image") @map("media_type") // "image" | "video"
+  thumbnailUrl String? @map("thumbnail_url")
+  sortOrder   Int      @default(0) @map("sort_order")
+  isActive    Boolean  @default(true) @map("is_active")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@index([isActive])
+  @@index([sortOrder])
+  @@map("shop_media")
 }

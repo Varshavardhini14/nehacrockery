@@ -1,14 +1,14 @@
-/* ═══════════════════════════════════════════════════════════════
-   NEHA CROCKERY HOUSE — Site Interactions
-   ═══════════════════════════════════════════════════════════════ */
+/* Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
+   NEHA CROCKERY HOUSE Ã¢â‚¬â€ Site Interactions
+   Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â */
 
 (function () {
   'use strict';
 
-  /* ──────────────────────────────────────────────────────────────
-     WELCOME POPUP — Auto-dismiss after delay
+  /* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
+     WELCOME POPUP Ã¢â‚¬â€ Auto-dismiss after delay
      Shows once per browser session (sessionStorage)
-  ─────────────────────────────────────────────────────────────── */
+  Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
   var POPUP_DURATION = 4000; // ms total display time before auto-dismiss
   var PROGRESS_CSS_DURATION = (POPUP_DURATION - 800) / 1000; // seconds (starts slightly after card loads)
 
@@ -56,13 +56,13 @@
     sessionStorage.setItem('nch-welcomed', '1');
 
   } else if (overlay) {
-    // Not homepage — remove popup immediately
+    // Not homepage Ã¢â‚¬â€ remove popup immediately
     overlay.parentNode && overlay.parentNode.removeChild(overlay);
   }
 
-  /* ──────────────────────────────────────────────────────────────
+  /* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
      HEADER SCROLL EFFECT
-  ─────────────────────────────────────────────────────────────── */
+  Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
   var header = document.getElementById('site-header');
 
   function onScroll() {
@@ -77,9 +77,9 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  /* ──────────────────────────────────────────────────────────────
+  /* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
      MOBILE MENU TOGGLE
-  ─────────────────────────────────────────────────────────────── */
+  Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
   var toggle     = document.getElementById('mobile-toggle');
   var mobileMenu = document.getElementById('mobile-menu');
 
@@ -119,9 +119,9 @@
     });
   }
 
-  /* ──────────────────────────────────────────────────────────────
+  /* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
      DARK / LIGHT MODE TOGGLE
-  ─────────────────────────────────────────────────────────────── */
+  Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
   var themeToggle = document.getElementById('theme-toggle');
   var htmlEl      = document.documentElement;
 
@@ -141,9 +141,9 @@
     });
   }
 
-  /* ──────────────────────────────────────────────────────────────
+  /* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
      SCROLL-REVEAL ANIMATION
-  ─────────────────────────────────────────────────────────────── */
+  Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
   function addRevealClasses() {
     // Products section
     var productCards = document.querySelectorAll('.product-card');
@@ -214,9 +214,9 @@
   addRevealClasses();
   observeReveal();
 
-  /* ──────────────────────────────────────────────────────────────
+  /* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬
      STATS COUNTER ANIMATION (homepage only)
-  ─────────────────────────────────────────────────────────────── */
+  Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
   function animateCounter(el, target, suffix) {
     var duration = 1600;
     var start    = performance.now();
@@ -265,18 +265,54 @@
 
 })();
 
-/* ═══════════════════════════════════════════════════════════════
-   PRODUCT ENGINE — loads products.json & brands.json, renders cards
-   ═══════════════════════════════════════════════════════════════ */
+/* Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
+   PRODUCT ENGINE Ã¢â‚¬â€ loads products.json & brands.json, renders cards
+   Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â */
 (function () {
   'use strict';
 
   var WA_NUMBER = '918870413413';
+  // Use relative URL when served from backend, absolute for file:// fallback
+  var API_BASE = '/api/v1';
+
+  /* API fetch helper */
+  function apiFetch(path, cb) {
+    fetch(API_BASE + path)
+      .then(function(res) { return res.json(); })
+      .then(function(data) { cb(null, data); })
+      .catch(function(err) { cb(err, null); });
+  }
+
+  function mapApiProduct(p) {
+    return {
+      id: p.productCode || p.id,
+      slug: p.slug || '',
+      name: p.name,
+      brand: (p.brand && p.brand.name) || '',
+      category: (p.category && p.category.slug) || '',
+      tags: [
+        p.isFeatured ? 'featured' : null,
+        p.isNewArrival ? 'new_arrival' : null,
+      ].filter(Boolean),
+      images: (p.images && p.images.length > 0)
+        ? p.images.map(function(img) { return img.imageUrl; })
+        : [],
+      capacity: p.capacity || '',
+      dimensions: p.dimensions || '',
+      material: p.material || '',
+      set_contents: p.setContents || '',
+      packaging: p.packagingInformation || '',
+      features: p.features || [],
+      mrp: p.catalogueMrp ? Number(p.catalogueMrp) : (p.mrp ? Number(p.mrp) : null),
+      collection: p.collection || '',
+      active: p.isActive !== false,
+    };
+  }
   var DATA_BASE = '../data/';
   var CATEGORY_ICONS = {
-    crockery: '🍽️', cutlery: '🍴', glassware: '🥂', melamineware: '🥣',
-    acrylicware: '🥤', kitchenware: '🍳', hotelware: '🏨',
-    'wooden-handicrafts': '🪵', 'new-arrivals': '✨'
+    crockery: 'Ã°Å¸ÂÂ½Ã¯Â¸Â', cutlery: 'Ã°Å¸ÂÂ´', glassware: 'Ã°Å¸Â¥â€š', melamineware: 'Ã°Å¸Â¥Â£',
+    acrylicware: 'Ã°Å¸Â¥Â¤', kitchenware: 'Ã°Å¸ÂÂ³', hotelware: 'Ã°Å¸ÂÂ¨',
+    'wooden-handicrafts': 'Ã°Å¸ÂªÂµ', 'new-arrivals': 'Ã¢Å“Â¨'
   };
   var CATEGORY_LABELS = {
     crockery: 'Crockery & Dinnerware', cutlery: 'Cutlery',
@@ -286,7 +322,7 @@
     'new-arrivals': 'New Arrivals'
   };
 
-  /* ── State ── */
+  /* Ã¢â€â‚¬Ã¢â€â‚¬ State Ã¢â€â‚¬Ã¢â€â‚¬ */
   var allProducts = [];
   var allBrands = [];
   var filteredProducts = [];
@@ -297,7 +333,7 @@
   var searchTerm = '';
   var sortOrder = 'default';
 
-  /* ── Fetch helpers ── */
+  /* Ã¢â€â‚¬Ã¢â€â‚¬ Fetch helpers Ã¢â€â‚¬Ã¢â€â‚¬ */
   function fetchJSON(path, cb) {
     // Try localStorage first (admin panel data)
     var localKey = path.includes('products') ? 'nch_products' : 'nch_brands';
@@ -315,60 +351,50 @@
       .catch(function (e) { cb(e, null); });
   }
 
-  /* ── Build a product card HTML ── */
+  /* Ã¢â€â‚¬Ã¢â€â‚¬ Build a product card HTML Ã¢â€â‚¬Ã¢â€â‚¬ */
+
+  /* -- Build a product card HTML -- */
   function buildProductCard(product) {
     var tags = product.tags || [];
     var isFeatured = tags.includes('featured');
     var isNew = tags.includes('new_arrival');
     var imageHtml = '';
-
+    var CICONS = {
+      'crockery': '🍽', 'crockery-dinnerware': '🍽',
+      'cutlery': '🍴', 'glassware': '🥂', 'glassware-bottles': '🥂',
+      'melamineware': '🥣', 'acrylicware': '🥤',
+      'kitchenware': '🍳', 'wooden-handicrafts': '🪵', 'hotelware': '🏨'
+    };
     if (product.images && product.images.length > 0) {
       imageHtml = '<img src="' + escHtml(product.images[0]) + '" alt="' + escHtml(product.name) + '" class="product-card-img" loading="lazy" />';
     } else {
-      var icon = CATEGORY_ICONS[product.category] || '📦';
-      imageHtml = '<div class="product-card-img-placeholder" aria-hidden="true">' + icon + '</div>';
+      var catIcon = CICONS[product.category] || '📦';
+      imageHtml = '<div class="product-card-img-placeholder" aria-hidden="true">' + catIcon + '</div>';
     }
-
     var badgesHtml = '';
     if (isFeatured) badgesHtml += '<span class="product-badge product-badge--featured">Featured</span>';
     if (isNew) badgesHtml += '<span class="product-badge product-badge--new">New</span>';
-    if (product.brand && product.brand.toLowerCase() === 'taroba') {
-      badgesHtml += '<span class="product-badge" style="background:var(--gold);color:white;">Taroba®</span>';
-    }
-
-    var waMsg = encodeURIComponent(
-      'Hello, I would like to enquire about: ' + product.name +
-      (product.id ? ' (Code: ' + product.id + ')' : '') + '.'
-    );
-
-    var catLabel = CATEGORY_LABELS[product.category] || product.category;
+    var catLabel = CATEGORY_LABELS[product.category] || (product.category || '').replace(/-/g, ' ');
     var metaInfo = [];
     if (product.material) metaInfo.push(product.material);
     if (product.capacity) metaInfo.push(product.capacity);
     if (product.set_contents) metaInfo.push(product.set_contents);
-
+    var href = product.slug ? ('product.html?slug=' + encodeURIComponent(product.slug)) : '#';
     return '<article class="product-card" data-id="' + escHtml(product.id || '') + '">' +
-      '<div class="product-card-img-wrap">' + imageHtml +
-      (badgesHtml ? '<div class="product-card-badges">' + badgesHtml + '</div>' : '') +
-      '</div>' +
+      '<a href="' + href + '" class="product-card-img-wrap" tabindex="-1">' + imageHtml +
+      (badgesHtml ? '<div class="product-card-badges">' + badgesHtml + '</div>' : '') + '</a>' +
       '<div class="product-card-body">' +
         (product.brand ? '<span class="product-card-brand">' + escHtml(product.brand) + '</span>' : '') +
-        '<h3 class="product-card-name">' + escHtml(product.name) + '</h3>' +
+        '<h3 class="product-card-name"><a href="' + href + '" style="color:inherit;text-decoration:none;">' + escHtml(product.name) + '</a></h3>' +
         '<span class="product-card-category">' + catLabel + '</span>' +
         (metaInfo.length ? '<span class="product-card-meta">' + escHtml(metaInfo.join(' · ')) + '</span>' : '') +
       '</div>' +
-      '<div class="product-card-footer">' +
-        '<a href="https://wa.me/' + WA_NUMBER + '?text=' + waMsg + '" ' +
-        'class="product-enquire-btn" target="_blank" rel="noopener" ' +
-        'aria-label="Enquire about ' + escHtml(product.name) + ' on WhatsApp">' +
-        '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">' +
-        '<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>' +
-        '</svg>Enquire on WhatsApp</a>' +
-      '</div>' +
+      '<div class="product-card-footer"><a href="' + href + '" class="product-enquire-btn">Order / Enquire</a></div>' +
     '</article>';
   }
 
-  /* ── Build brand card HTML ── */
+
+  /* Ã¢â€â‚¬Ã¢â€â‚¬ Build brand card HTML Ã¢â€â‚¬Ã¢â€â‚¬ */
   function buildBrandCard(brand) {
     var logoHtml = brand.logo
       ? '<img src="' + escHtml(brand.logo) + '" alt="' + escHtml(brand.name) + '" class="brand-card-logo" />'
@@ -382,7 +408,7 @@
     '</div>';
   }
 
-  /* ── Homepage: Featured products ── */
+  /* Ã¢â€â‚¬Ã¢â€â‚¬ Homepage: Featured products Ã¢â€â‚¬Ã¢â€â‚¬ */
   function initHomepageFeatured() {
     var featuredGrid = document.getElementById('featured-products-grid');
     var arrivalsScroll = document.getElementById('new-arrivals-scroll');
@@ -423,7 +449,7 @@
     });
   }
 
-  /* ── Brands page ── */
+  /* Ã¢â€â‚¬Ã¢â€â‚¬ Brands page Ã¢â€â‚¬Ã¢â€â‚¬ */
   function initBrandsPage() {
     var grid = document.getElementById('brands-full-grid');
     if (!grid) return;
@@ -438,7 +464,7 @@
     });
   }
 
-  /* ── Taroba page ── */
+  /* Ã¢â€â‚¬Ã¢â€â‚¬ Taroba page Ã¢â€â‚¬Ã¢â€â‚¬ */
   function initTarobaPage() {
     var grid = document.getElementById('taroba-products-grid');
     if (!grid) return;
@@ -455,7 +481,7 @@
     });
   }
 
-  /* ── Products page ── */
+  /* Ã¢â€â‚¬Ã¢â€â‚¬ Products page Ã¢â€â‚¬Ã¢â€â‚¬ */
   function initProductsPage() {
     var grid = document.getElementById('products-main-grid');
     if (!grid) return;
@@ -471,25 +497,62 @@
     if (urlCat || urlBrand) {
       document.querySelectorAll('.category-chip').forEach(function (chip) {
         chip.classList.remove('active');
-        if (chip.dataset.cat === urlCat) chip.classList.add('active');
+        if (chip.dataset.category === urlCat) chip.classList.add('active');
       });
     }
 
+    // -- API-FIRST LOADING: Try live backend before falling back to JSON --
+    apiFetch('/products?active=true&pageSize=100&sortBy=name&sortOrder=asc', function(apiErr, apiData) {
+      if (!apiErr && apiData && Array.isArray(apiData.data) && apiData.data.length > 0) {
+        // API already filters active=true, so all returned products are active
+        allProducts = apiData.data.map(mapApiProduct);
+        applyFiltersAndRender();
+        // Load remaining pages in the background
+        var totalPages = (apiData.pagination && apiData.pagination.totalPages) || 1;
+        if (totalPages > 1) {
+          loadRemainingPages(2, totalPages);
+        }
+        apiFetch('/brands', function(bErr, bData) {
+          if (!bErr && bData && Array.isArray(bData.data)) {
+            populateBrandFilter(bData.data);
+          }
+        });
+        return;
+      }
+      // Fallback: load from static JSON file
+      loadProductsFromJson();
+    });
+
+    function loadRemainingPages(startPage, totalPages) {
+      if (startPage > totalPages) return;
+      apiFetch('/products?active=true&pageSize=100&sortBy=name&sortOrder=asc&page=' + startPage, function(err, data) {
+        if (!err && data && Array.isArray(data.data)) {
+          allProducts = allProducts.concat(data.data.map(mapApiProduct));
+          applyFiltersAndRender();
+          loadRemainingPages(startPage + 1, totalPages);
+        }
+      });
+    }
+
+
+    function loadProductsFromJson() {
     fetchJSON(DATA_BASE + 'products.json', function (err, data) {
       if (err || !data) {
-        grid.innerHTML = '<div class="products-empty"><div class="products-empty-icon">📦</div><p class="products-empty-desc">Could not load products. Please try again later.</p></div>';
+        grid.innerHTML = '<div class="products-empty"><div class="products-empty-icon">Ã°Å¸â€œÂ¦</div><p class="products-empty-desc">Could not load products. Please try again later.</p></div>';
         return;
       }
       allProducts = (data.products || []).filter(function (p) { return p.active !== false; });
       applyFiltersAndRender();
     });
+    } // end loadProductsFromJson
+
 
     // Chip click
     document.querySelectorAll('.category-chip').forEach(function (chip) {
       chip.addEventListener('click', function () {
         document.querySelectorAll('.category-chip').forEach(function (c) { c.classList.remove('active'); });
         this.classList.add('active');
-        activeCategory = this.dataset.cat || 'all';
+        activeCategory = this.dataset.category || 'all';
         activeBrand = null;
         currentPage = 1;
         applyFiltersAndRender();
@@ -539,14 +602,19 @@
 
     // Filter
     filteredProducts = allProducts.filter(function (p) {
+      var cat = (p.category || '').toLowerCase();
       var matchCat = activeCategory === 'all' ||
-        (activeCategory === 'new-arrivals' ? (p.tags || []).includes('new_arrival') : p.category === activeCategory);
+        (activeCategory === 'new-arrivals'
+          ? (p.tags || []).includes('new_arrival')
+          : cat === activeCategory || cat.startsWith(activeCategory + '-') || cat.startsWith(activeCategory.replace('-', '')));
       var matchBrand = !activeBrand || (p.brand || '').toLowerCase() === activeBrand.toLowerCase();
       var matchSearch = !searchTerm ||
         (p.name || '').toLowerCase().includes(searchTerm) ||
         (p.brand || '').toLowerCase().includes(searchTerm) ||
         (p.id || '').toLowerCase().includes(searchTerm) ||
-        (p.category || '').toLowerCase().includes(searchTerm);
+        (p.category || '').toLowerCase().includes(searchTerm) ||
+        (p.collection || '').toLowerCase().includes(searchTerm) ||
+        (p.material || '').toLowerCase().includes(searchTerm);
       return matchCat && matchBrand && matchSearch;
     });
 
@@ -562,7 +630,7 @@
 
     if (total === 0) {
       grid.innerHTML = '<div class="products-empty">' +
-        '<div class="products-empty-icon">🔍</div>' +
+        '<div class="products-empty-icon">Ã°Å¸â€Â</div>' +
         '<h3 class="products-empty-title">No Products Found</h3>' +
         '<p class="products-empty-desc">Try adjusting your search or filter, or contact us for the full range.</p>' +
         '<a href="https://wa.me/' + WA_NUMBER + '" class="btn-whatsapp" target="_blank" rel="noopener">Ask on WhatsApp &#8594;</a>' +
@@ -582,7 +650,7 @@
     }
   }
 
-  /* ── Reviews carousel nav ── */
+  /* Ã¢â€â‚¬Ã¢â€â‚¬ Reviews carousel nav Ã¢â€â‚¬Ã¢â€â‚¬ */
   function initReviewsNav() {
     var carousel = document.getElementById('reviews-carousel');
     var prevBtn = document.getElementById('reviews-prev');
@@ -594,7 +662,7 @@
     if (nextBtn) nextBtn.addEventListener('click', function () { carousel.scrollBy({ left: SCROLL_AMOUNT, behavior: 'smooth' }); });
   }
 
-  /* ── Contact enquiry form → WhatsApp ── */
+  /* Ã¢â€â‚¬Ã¢â€â‚¬ Contact enquiry form Ã¢â€ â€™ WhatsApp Ã¢â€â‚¬Ã¢â€â‚¬ */
   function initContactForm() {
     var form = document.getElementById('contact-enquiry-form');
     if (!form) return;
@@ -622,7 +690,7 @@
     });
   }
 
-  /* ── Index enquiry form → WhatsApp ── */
+  /* Ã¢â€â‚¬Ã¢â€â‚¬ Index enquiry form Ã¢â€ â€™ WhatsApp Ã¢â€â‚¬Ã¢â€â‚¬ */
   function initEnquiryForm() {
     var form = document.getElementById('homepage-enquiry-form');
     if (!form) return;
@@ -650,7 +718,7 @@
     });
   }
 
-  /* ── Escape HTML ── */
+  /* Ã¢â€â‚¬Ã¢â€â‚¬ Escape HTML Ã¢â€â‚¬Ã¢â€â‚¬ */
   function escHtml(str) {
     return String(str || '')
       .replace(/&/g, '&amp;')
@@ -659,7 +727,7 @@
       .replace(/"/g, '&quot;');
   }
 
-  /* ── Init all ── */
+  /* Ã¢â€â‚¬Ã¢â€â‚¬ Init all Ã¢â€â‚¬Ã¢â€â‚¬ */
   document.addEventListener('DOMContentLoaded', function () {
     initHomepageFeatured();
     initBrandsPage();
@@ -672,3 +740,211 @@
 
 })();
 
+
+/* ════════════════════════════════════════════════════════════════════════════
+   SITE SETTINGS ENGINE — Fetches live settings from API and applies them
+   to every element on every page (phone, WhatsApp, address, hours, map, etc.)
+   ════════════════════════════════════════════════════════════════════════════ */
+(function () {
+  'use strict';
+
+  var SETTINGS_API = '/api/v1/site-settings';
+  var SETTINGS_CACHE_KEY = 'nch_site_settings';
+  var SETTINGS_CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+
+  function applySettings(s) {
+    if (!s) return;
+    var phone = s.phone || '';
+    var whatsapp = s.whatsapp || s.phone || '';
+    var waNumber = whatsapp.replace(/\D/g, '');
+    if (waNumber.length === 10) waNumber = '91' + waNumber;
+
+    // Update every WhatsApp href
+    document.querySelectorAll('a[href*="wa.me"]').forEach(function (el) {
+      var existing = el.getAttribute('href') || '';
+      var qIdx = existing.indexOf('?');
+      var qs = qIdx !== -1 ? existing.slice(qIdx) : '';
+      el.setAttribute('href', 'https://wa.me/' + waNumber + qs);
+    });
+
+    // Update every tel: link
+    document.querySelectorAll('a[href^="tel:"]').forEach(function (el) {
+      el.setAttribute('href', 'tel:+' + waNumber);
+      var txt = el.textContent.trim();
+      if (/^\+?[\d\s\-()\u00a0]{7,}$/.test(txt) && phone) {
+        el.textContent = phone;
+      }
+    });
+
+    // Update contact-phone-link text
+    var phoneLink = document.getElementById('contact-phone-link');
+    if (phoneLink && phone) {
+      phoneLink.textContent = phone;
+      phoneLink.setAttribute('href', 'tel:+' + waNumber);
+    }
+
+    // Update address
+    if (s.address) {
+      document.querySelectorAll('[data-dynamic="address"]').forEach(function (el) { el.textContent = s.address; });
+      document.querySelectorAll('.contact-card-text').forEach(function (el) {
+        if (el.closest('#contact-address-card')) el.innerHTML = s.address.replace(/,\s*/g, ',<br />');
+      });
+      document.querySelectorAll('.map-address').forEach(function (el) { el.textContent = s.address; });
+    }
+
+    // Update Google Maps links
+    if (s.googleMapsUrl) {
+      document.querySelectorAll('a[href*="maps.google"], a[href*="goo.gl/maps"]').forEach(function (el) {
+        el.setAttribute('href', s.googleMapsUrl);
+      });
+    }
+
+    // Update business hours
+    if (s.businessHours) {
+      document.querySelectorAll('[data-dynamic="hours"]').forEach(function (el) { el.textContent = s.businessHours; });
+    }
+
+    // Update email
+    if (s.email) {
+      document.querySelectorAll('a[href^="mailto:"]').forEach(function (el) {
+        el.setAttribute('href', 'mailto:' + s.email);
+        if (el.textContent.trim().includes('@')) el.textContent = s.email;
+      });
+    }
+
+    // Store WA number for forms
+    document.body.dataset.waNumber = waNumber;
+  }
+
+  function loadSettings() {
+    try {
+      var raw = sessionStorage.getItem(SETTINGS_CACHE_KEY);
+      if (raw) {
+        var cached = JSON.parse(raw);
+        if (cached && cached.ts && (Date.now() - cached.ts < SETTINGS_CACHE_TTL)) {
+          applySettings(cached.data);
+          return;
+        }
+      }
+    } catch (e) {}
+
+    fetch(SETTINGS_API)
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (resp) {
+        if (!resp || !resp.data) return;
+        var s = resp.data;
+        applySettings(s);
+        try { sessionStorage.setItem(SETTINGS_CACHE_KEY, JSON.stringify({ ts: Date.now(), data: s })); } catch (e) {}
+      })
+      .catch(function () {});
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadSettings);
+  } else {
+    loadSettings();
+  }
+
+  // Listen for admin settings save (cross-tab via localStorage)
+  window.addEventListener('storage', function (e) {
+    if (e.key === 'nch_settings_version') {
+      // Admin saved new settings — bust sessionStorage cache and re-fetch
+      try { sessionStorage.removeItem(SETTINGS_CACHE_KEY); } catch (ex) {}
+      fetch(SETTINGS_API)
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (resp) {
+          if (!resp || !resp.data) return;
+          applySettings(resp.data);
+          try { sessionStorage.setItem(SETTINGS_CACHE_KEY, JSON.stringify({ ts: Date.now(), data: resp.data })); } catch (ex) {}
+        })
+        .catch(function () {});
+    }
+  });
+
+})();
+
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   SHOP GALLERY ENGINE — Loads shop images & videos for the Contact page
+   ════════════════════════════════════════════════════════════════════════════ */
+(function () {
+  'use strict';
+  var GALLERY_API = '/api/v1/shop-media';
+
+  function escG(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+  function buildItem(item) {
+    var cap = item.title ? '<p class="gallery-caption">' + escG(item.title) + '</p>' : '';
+    if (item.mediaType === 'video') {
+      var thumb = item.thumbnailUrl
+        ? '<img src="' + escG(item.thumbnailUrl) + '" alt="' + escG(item.title||'Shop video') + '" loading="lazy" />'
+        : '<div class="gallery-video-placeholder"><span class="gallery-play-icon">&#9654;</span></div>';
+      return '<div class="gallery-item gallery-item--video" tabindex="0" role="button" aria-label="' + escG(item.title||'Shop video') + '" data-media-url="' + escG(item.mediaUrl) + '" data-media-type="video"><div class="gallery-item-inner">' + thumb + '<div class="gallery-video-badge"><span>&#9654;</span> Video</div></div>' + cap + '</div>';
+    }
+    return '<div class="gallery-item" tabindex="0" role="button" aria-label="' + escG(item.title||'Shop photo') + '" data-media-url="' + escG(item.mediaUrl) + '" data-media-type="image"><div class="gallery-item-inner"><img src="' + escG(item.mediaUrl) + '" alt="' + escG(item.title||'Neha Crockery House') + '" loading="lazy" /><div class="gallery-overlay"><span class="gallery-zoom-icon">&#8853;</span></div></div>' + cap + '</div>';
+  }
+
+  function openLightbox(url, type, caption) {
+    var lb = document.getElementById('shop-lightbox');
+    if (!lb) return;
+    var inner = lb.querySelector('.lightbox-inner');
+    if (type === 'video') {
+      inner.innerHTML = '<video controls autoplay style="max-width:100%;max-height:80vh;border-radius:8px;"><source src="' + escG(url) + '" /></video>' + (caption ? '<p class="lightbox-caption">' + escG(caption) + '</p>' : '');
+    } else {
+      inner.innerHTML = '<img src="' + escG(url) + '" alt="' + escG(caption||'') + '" style="max-width:100%;max-height:80vh;border-radius:8px;object-fit:contain;" />' + (caption ? '<p class="lightbox-caption">' + escG(caption) + '</p>' : '');
+    }
+    lb.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    var lb = document.getElementById('shop-lightbox');
+    if (!lb) return;
+    lb.style.display = 'none';
+    lb.querySelector('.lightbox-inner').innerHTML = '';
+    document.body.style.overflow = '';
+  }
+
+  function initShopGallery() {
+    var wrap = document.getElementById('shop-gallery-wrap');
+    if (!wrap) return;
+    wrap.innerHTML = '<p class="gallery-loading">Loading gallery...</p>';
+    fetch(GALLERY_API)
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (resp) {
+        var items = (resp && resp.data) || [];
+        if (!items.length) {
+          wrap.innerHTML = '<p class="gallery-empty">Shop photos and videos will appear here once uploaded via the admin panel.</p>';
+          return;
+        }
+        wrap.innerHTML = items.map(buildItem).join('');
+        wrap.querySelectorAll('.gallery-item').forEach(function (el) {
+          function open() {
+            var cap = el.querySelector('.gallery-caption');
+            openLightbox(el.dataset.mediaUrl, el.dataset.mediaType, cap ? cap.textContent : '');
+          }
+          el.addEventListener('click', open);
+          el.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } });
+        });
+
+        if (!document.getElementById('shop-lightbox')) {
+          var lb = document.createElement('div');
+          lb.id = 'shop-lightbox';
+          lb.setAttribute('role', 'dialog');
+          lb.setAttribute('aria-modal', 'true');
+          lb.style.cssText = 'display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:9999;align-items:center;justify-content:center;padding:20px;';
+          lb.innerHTML = '<button class="lightbox-close" aria-label="Close" style="position:absolute;top:16px;right:20px;background:none;border:none;color:#fff;font-size:2.5rem;cursor:pointer;line-height:1;">&times;</button><div class="lightbox-inner" style="text-align:center;"></div>';
+          document.body.appendChild(lb);
+          lb.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+          lb.addEventListener('click', function (e) { if (e.target === lb) closeLightbox(); });
+          document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLightbox(); });
+        }
+      })
+      .catch(function () {
+        wrap.innerHTML = '<p class="gallery-empty">Could not load gallery.</p>';
+      });
+  }
+
+  document.addEventListener('DOMContentLoaded', initShopGallery);
+})();

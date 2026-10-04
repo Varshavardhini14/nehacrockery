@@ -2677,5 +2677,122 @@ address { font-style: normal; }
    ADMIN — EXTENDED STYLES (Categories, Enquiries, API Settings)
    ═══════════════════════════════════════════════════════════════ */
 
+/* ═══════════════════════════════════════════════════════════════════
+   SHOP GALLERY — Contact Page
+   ═══════════════════════════════════════════════════════════════════ */
+.shop-gallery-section {
+  padding: 80px 0 100px;
+  background: var(--c-bg, #f8f5f0);
+}
 
+.shop-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
 
+.gallery-item {
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(0,0,0,.07);
+  transition: transform .25s ease, box-shadow .25s ease;
+  position: relative;
+}
+.gallery-item:hover, .gallery-item:focus-visible {
+  transform: translateY(-4px) scale(1.015);
+  box-shadow: 0 8px 30px rgba(0,0,0,.15);
+  outline: none;
+}
+
+.gallery-item-inner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+}
+.gallery-item-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .4s ease;
+}
+.gallery-item:hover .gallery-item-inner img {
+  transform: scale(1.06);
+}
+
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(26,43,74,.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+.gallery-item:hover .gallery-overlay,
+.gallery-item:focus-visible .gallery-overlay {
+  opacity: 1;
+}
+.gallery-zoom-icon {
+  font-size: 2.4rem;
+  color: #fff;
+  line-height: 1;
+}
+
+/* Video badge */
+.gallery-item--video .gallery-video-badge {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  background: rgba(0,0,0,.65);
+  color: #fff;
+  font-size: .72rem;
+  padding: 3px 9px;
+  border-radius: 20px;
+  letter-spacing: .04em;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.gallery-video-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg,#1a2b4a,#3a5a8a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.gallery-play-icon {
+  font-size: 3rem;
+  color: rgba(255,255,255,.8);
+}
+
+.gallery-caption {
+  font-size: .78rem;
+  color: #555;
+  padding: 8px 12px;
+  margin: 0;
+  text-align: center;
+  font-family: var(--font-body, 'Montserrat', sans-serif);
+  letter-spacing: .01em;
+}
+
+.gallery-loading, .gallery-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  color: #888;
+  font-size: .95rem;
+}
+
+/* Lightbox caption */
+.lightbox-caption {
+  color: rgba(255,255,255,.85);
+  font-size: .85rem;
+  margin-top: 12px;
+  text-align: center;
+}

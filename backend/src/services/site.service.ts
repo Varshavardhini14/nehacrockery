@@ -172,3 +172,62 @@ export async function deleteCatalogue(id: string) {
   if (!existing) throw AppError.notFound('Catalogue');
   await prisma.catalogue.delete({ where: { id } });
 }
+
+// ── SHOP GALLERY (ShopMedia) ──────────────────────────────────────────────────
+
+const shopMediaSelect = {
+  id: true,
+  title: true,
+  description: true,
+  mediaUrl: true,
+  mediaType: true,
+  thumbnailUrl: true,
+  sortOrder: true,
+  isActive: true,
+  createdAt: true,
+  updatedAt: true,
+};
+
+export async function listShopMedia(adminMode = false) {
+  return prisma.shopMedia.findMany({
+    where: adminMode ? undefined : { isActive: true },
+    orderBy: [{ sortOrder: 'asc' }, { createdAt: 'desc' }],
+    select: shopMediaSelect,
+  });
+}
+
+export async function createShopMedia(data: {
+  title?: string | null;
+  description?: string | null;
+  mediaUrl: string;
+  mediaType?: string;
+  thumbnailUrl?: string | null;
+  sortOrder?: number;
+  isActive?: boolean;
+}) {
+  return prisma.shopMedia.create({
+    data: {
+      ...data,
+      mediaType: data.mediaType ?? 'image',
+      sortOrder: data.sortOrder ?? 0,
+      isActive: data.isActive ?? true,
+    },
+    select: shopMediaSelect,
+  });
+}
+
+export async function updateShopMedia(
+  id: string,
+  data: Partial<Parameters<typeof createShopMedia>[0]>,
+) {
+  const existing = await prisma.shopMedia.findUnique({ where: { id }, select: { id: true } });
+  if (!existing) throw AppError.notFound('ShopMedia');
+  return prisma.shopMedia.update({ where: { id }, data, select: shopMediaSelect });
+}
+
+export async function deleteShopMedia(id: string) {
+  const existing = await prisma.shopMedia.findUnique({ where: { id }, select: { id: true } });
+  if (!existing) throw AppError.notFound('ShopMedia');
+  await prisma.shopMedia.delete({ where: { id } });
+}
+

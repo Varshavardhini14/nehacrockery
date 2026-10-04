@@ -56,7 +56,7 @@ function coerceNumber(v: unknown): number | null {
 
 export async function importProductsFromBuffer(
   buffer: Buffer,
-  mimetype: string,
+  _mimetype: string,
 ): Promise<ImportReport> {
   // Parse workbook
   const workbook = XLSX.read(buffer, { type: 'buffer' });

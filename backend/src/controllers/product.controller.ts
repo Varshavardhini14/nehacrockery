@@ -6,7 +6,6 @@ import * as productService from '../services/product.service';
 import * as importService from '../services/import.service';
 import { sendSuccess, sendPaginated, sendCreated, sendNoContent } from '../utils/apiResponse';
 import { AppError } from '../utils/AppError';
-import path from 'path';
 
 // ── PUBLIC ────────────────────────────────────────────────────────────────────
 

@@ -5,7 +5,20 @@ export default defineConfig({
   root: '.',
   server: {
     port: 3000,
-    open: '/frontend/index.html'
+    open: '/frontend/index.html',
+    // ── Dev proxy: forward API & upload requests to the backend server ──────
+    proxy: {
+      '/api': {
+        target: 'http://localhost:4000',
+        changeOrigin: true,
+        secure: false,
+      },
+      '/uploads': {
+        target: 'http://localhost:4000',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
   },
   build: {
     outDir: 'dist',
@@ -31,3 +44,4 @@ export default defineConfig({
     }
   }
 });
+

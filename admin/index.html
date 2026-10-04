@@ -1,350 +1,1380 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Dashboard – Neha Crockery House</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard — Neha Crockery House</title>
   <meta name="robots" content="noindex, nofollow" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles/admin.css" />
 </head>
 <body class="admin-body">
 
-  <!-- LOGIN GATE -->
-  <div class="admin-login-overlay" id="admin-login-overlay">
-    <div class="admin-login-card">
-      <div class="admin-login-logo">
-        <img src="../frontend/assets/images/logo.jpeg" alt="Neha Crockery House" />
-      </div>
-      <h1 class="admin-login-title">Admin Dashboard</h1>
-      <p class="admin-login-sub">Neha Crockery House — Staff Only</p>
-      <form class="admin-login-form" id="admin-login-form" novalidate>
-        <div class="admin-form-group">
-          <label for="admin-password">Password</label>
-          <input type="password" id="admin-password" name="password" class="admin-input" placeholder="Enter admin password" autocomplete="current-password" required />
-        </div>
-        <button type="submit" class="admin-btn admin-btn-primary" id="admin-login-btn">Login &#8594;</button>
-        <p class="admin-login-error" id="admin-login-error" aria-live="polite"></p>
-      </form>
-      <p class="admin-login-note">Default password: <code>neha2024</code> (change after first login)</p>
+<!-- ═══ LOGIN SCREEN ═════════════════════════════════════════════════════ -->
+<div class="login-screen" id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">
+      <img src="/frontend/assets/images/logo.jpeg" alt="Neha Crockery House" onerror="this.style.display='none'" />
+      <h1>NCH Admin</h1>
+      <p>Neha Crockery House &mdash; Staff Only</p>
     </div>
+    <form id="login-form" novalidate>
+      <div class="login-field">
+        <label for="l-email">Email Address</label>
+        <input type="email" id="l-email" name="email" placeholder="admin@nehacrockery.com"
+               autocomplete="username" value="admin@nehacrockery.com" required />
+      </div>
+      <div class="login-field">
+        <label for="l-password">Password</label>
+        <input type="password" id="l-password" name="password"
+               placeholder="Enter your password" autocomplete="current-password" required />
+      </div>
+      <button type="submit" class="login-btn" id="login-btn">Sign In →</button>
+      <p class="login-error" id="login-error" role="alert"></p>
+    </form>
+    <p class="login-hint">Use the credentials from <code>ADMIN_EMAIL</code> / <code>ADMIN_PASSWORD</code> in <code>backend/.env</code></p>
   </div>
+</div>
 
-  <!-- MAIN DASHBOARD -->
-  <div class="admin-dashboard" id="admin-dashboard" style="display:none;"
-       data-api-url=""
-       data-version="1.0.0">
+<!-- ═══ DASHBOARD APP ════════════════════════════════════════════════════ -->
+<div class="admin-app" id="admin-app" style="display:none;"
+     data-api="/api/v1">
 
-    <!-- Sidebar -->
-    <aside class="admin-sidebar" id="admin-sidebar">
-      <div class="admin-sidebar-logo">
-        <img src="../frontend/assets/images/logo.jpeg" alt="Neha Crockery House" class="admin-sidebar-logo-img" />
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">
+        <img src="/frontend/assets/images/logo.jpeg" alt="NCH" onerror="this.style.display='none'" />
+      </div>
+      <div class="sidebar-brand-text">
+        <span class="sidebar-brand">NCH Admin</span>
+        <span class="sidebar-sub">Neha Crockery House</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav" aria-label="Admin navigation">
+      <div class="sidebar-section-label">Overview</div>
+      <button class="nav-item active" data-section="dashboard" id="nav-dashboard">
+        <span class="nav-icon">📊</span>
+        <span class="nav-label">Dashboard</span>
+      </button>
+
+      <div class="sidebar-section-label">Catalogue</div>
+      <button class="nav-item" data-section="products" id="nav-products">
+        <span class="nav-icon">📦</span>
+        <span class="nav-label">Products</span>
+      </button>
+      <button class="nav-item" data-section="categories" id="nav-categories">
+        <span class="nav-icon">🗂</span>
+        <span class="nav-label">Categories</span>
+      </button>
+      <button class="nav-item" data-section="brands" id="nav-brands">
+        <span class="nav-icon">🏭</span>
+        <span class="nav-label">Brands</span>
+      </button>
+      <button class="nav-item" data-section="catalogues" id="nav-catalogues">
+        <span class="nav-icon">📋</span>
+        <span class="nav-label">Catalogues</span>
+      </button>
+
+      <div class="sidebar-section-label">Website</div>
+      <button class="nav-item" data-section="homepage" id="nav-homepage">
+        <span class="nav-icon">🏠</span>
+        <span class="nav-label">Homepage</span>
+      </button>
+      <button class="nav-item" data-section="shop-gallery" id="nav-shop-gallery">
+        <span class="nav-icon">📸</span>
+        <span class="nav-label">Shop Gallery</span>
+      </button>
+
+      <div class="sidebar-section-label">Business</div>
+      <button class="nav-item" data-section="enquiries" id="nav-enquiries">
+        <span class="nav-icon">💬</span>
+        <span class="nav-label">Enquiries</span>
+        <span class="nav-badge hidden" id="enquiry-badge">0</span>
+      </button>
+      <button class="nav-item" data-section="customers" id="nav-customers">
+        <span class="nav-icon">👥</span>
+        <span class="nav-label">Customers</span>
+      </button>
+      <button class="nav-item" data-section="sales" id="nav-sales">
+        <span class="nav-icon">💼</span>
+        <span class="nav-label">Sales</span>
+      </button>
+
+      <div class="sidebar-section-label">Admin</div>
+      <button class="nav-item" data-section="reports" id="nav-reports">
+        <span class="nav-icon">📈</span>
+        <span class="nav-label">Reports</span>
+      </button>
+      <button class="nav-item" data-section="auditlogs" id="nav-auditlogs">
+        <span class="nav-icon">🔍</span>
+        <span class="nav-label">Audit Logs</span>
+      </button>
+      <button class="nav-item" data-section="settings" id="nav-settings">
+        <span class="nav-icon">⚙️</span>
+        <span class="nav-label">Settings</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="sidebar-user-avatar" id="user-avatar">A</div>
         <div>
-          <span class="admin-sidebar-brand">NCH Admin</span>
-          <span class="admin-sidebar-sub">Dashboard</span>
+          <div class="sidebar-user-name" id="user-name">Admin</div>
+          <div class="sidebar-user-role" id="user-role">ADMIN</div>
         </div>
       </div>
-      <nav class="admin-nav" aria-label="Admin navigation">
-        <ul class="admin-nav-list">
-          <li><button class="admin-nav-link active" data-tab="products" id="admin-nav-products">&#128230; Products</button></li>
-          <li><button class="admin-nav-link" data-tab="categories" id="admin-nav-categories">&#128193; Categories</button></li>
-          <li><button class="admin-nav-link" data-tab="brands" id="admin-nav-brands">&#127981; Brands</button></li>
-          <li><button class="admin-nav-link" data-tab="enquiries" id="admin-nav-enquiries">&#128386; Enquiries</button></li>
-          <li><button class="admin-nav-link" data-tab="export" id="admin-nav-export">&#128190; Export / Import</button></li>
-          <li><button class="admin-nav-link" data-tab="settings" id="admin-nav-settings">&#9881; Settings</button></li>
-        </ul>
-      </nav>
-      <div class="admin-sidebar-footer">
-        <a href="../frontend/index.html" class="admin-view-site" target="_blank">&#128065; View Website</a>
-        <button class="admin-logout-btn" id="admin-logout-btn">Logout</button>
+      <div class="sidebar-footer-btns">
+        <a href="/frontend/index.html" class="footer-btn footer-btn-site" target="_blank" rel="noopener">🌐 Site</a>
+        <button class="footer-btn footer-btn-logout" id="logout-btn">↩ Logout</button>
       </div>
-    </aside>
+    </div>
+  </aside>
 
-    <!-- Main Content -->
-    <main class="admin-main" id="admin-main">
+  <!-- MAIN CONTENT -->
+  <div class="main-content" id="main-content">
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="topbar-title" id="topbar-title">Dashboard</span>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-badge">
+          <span class="dot"></span>
+          <span>Backend Connected</span>
+        </div>
+      </div>
+    </header>
 
-      <!-- ═══ TAB: PRODUCTS ═══ -->
-      <div class="admin-tab" id="tab-products">
-        <div class="admin-page-header">
-          <div>
-            <h2 class="admin-page-title">Products</h2>
-            <p class="admin-page-sub" id="admin-product-count">Loading…</p>
+    <div class="page-content">
+
+      <!-- ═══ SECTION: DASHBOARD ═════════════════════════════════════════ -->
+      <section class="admin-section active" id="section-dashboard">
+        <div class="page-header">
+          <div class="page-header-info">
+            <h1 class="page-title">Dashboard</h1>
+            <p class="page-subtitle" id="dashboard-welcome">Welcome back! Here's what's happening.</p>
           </div>
-          <button class="admin-btn admin-btn-primary" id="btn-add-product">+ Add Product</button>
+          <div class="page-actions">
+            <button class="btn btn-ghost" onclick="loadDashboard()">↻ Refresh</button>
+          </div>
         </div>
 
-        <!-- Product Filter Bar -->
-        <div class="admin-toolbar">
-          <input type="search" id="admin-product-search" class="admin-search" placeholder="Search by name, ID or brand…" aria-label="Search products" />
-          <select id="admin-product-filter-cat" class="admin-select" aria-label="Filter by category">
+        <div class="stats-grid" id="stats-grid">
+          <div class="stat-card" style="--accent:#10b981">
+            <span class="stat-card-icon">📦</span>
+            <div class="stat-value" id="stat-products">—</div>
+            <div class="stat-label">Total Products</div>
+          </div>
+          <div class="stat-card" style="--accent:#3b82f6">
+            <span class="stat-card-icon">✅</span>
+            <div class="stat-value" id="stat-active">—</div>
+            <div class="stat-label">Active Products</div>
+          </div>
+          <div class="stat-card" style="--accent:#c8a84b">
+            <span class="stat-card-icon">⭐</span>
+            <div class="stat-value" id="stat-featured">—</div>
+            <div class="stat-label">Featured</div>
+          </div>
+          <div class="stat-card" style="--accent:#8b5cf6">
+            <span class="stat-card-icon">🆕</span>
+            <div class="stat-value" id="stat-new">—</div>
+            <div class="stat-label">New Arrivals</div>
+          </div>
+          <div class="stat-card" style="--accent:#f59e0b">
+            <span class="stat-card-icon">💬</span>
+            <div class="stat-value" id="stat-enquiries">—</div>
+            <div class="stat-label">Enquiries</div>
+          </div>
+          <div class="stat-card" style="--accent:#ef4444">
+            <span class="stat-card-icon">🔔</span>
+            <div class="stat-value" id="stat-new-enquiries">—</div>
+            <div class="stat-label">New Enquiries</div>
+          </div>
+          <div class="stat-card" style="--accent:#0d1f3c">
+            <span class="stat-card-icon">📋</span>
+            <div class="stat-value" id="stat-catalogues">—</div>
+            <div class="stat-label">Catalogues</div>
+          </div>
+          <div class="stat-card" style="--accent:#10b981">
+            <span class="stat-card-icon">💼</span>
+            <div class="stat-value" id="stat-sales">—</div>
+            <div class="stat-label">Sales Records</div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Recent Enquiries</span>
+              <button class="btn btn-sm btn-ghost" onclick="navigate('enquiries')">View All</button>
+            </div>
+            <div id="dash-enquiries" class="activity-feed" style="padding:0 20px;"></div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Recent Sales</span>
+              <button class="btn btn-sm btn-ghost" onclick="navigate('sales')">View All</button>
+            </div>
+            <div id="dash-sales" class="activity-feed" style="padding:0 20px;"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ SECTION: PRODUCTS ══════════════════════════════════════════ -->
+      <section class="admin-section" id="section-products">
+        <div class="page-header">
+          <div class="page-header-info">
+            <h1 class="page-title">Products</h1>
+            <p class="page-subtitle" id="products-count">Loading…</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-ghost btn-sm" id="btn-import-products">⬆ Import CSV</button>
+            <button class="btn btn-primary" id="btn-add-product">+ Add Product</button>
+          </div>
+        </div>
+
+        <div class="toolbar">
+          <input type="search" class="search-input" id="product-search"
+                 placeholder="Search name, code, collection…" />
+          <select class="filter-select" id="product-filter-cat">
             <option value="all">All Categories</option>
-            <option value="crockery">Crockery</option>
-            <option value="cutlery">Cutlery</option>
-            <option value="glassware">Glassware</option>
-            <option value="melamineware">Melamineware</option>
-            <option value="acrylicware">Acrylicware</option>
-            <option value="kitchenware">Kitchenware</option>
-            <option value="wooden-handicrafts">Wooden</option>
           </select>
-          <select id="admin-product-filter-status" class="admin-select" aria-label="Filter by status">
+          <select class="filter-select" id="product-filter-brand">
+            <option value="all">All Brands</option>
+          </select>
+          <select class="filter-select" id="product-filter-status">
             <option value="all">All Status</option>
-            <option value="active">Active Only</option>
-            <option value="inactive">Inactive Only</option>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+            <option value="featured">Featured</option>
+            <option value="new">New Arrivals</option>
           </select>
         </div>
 
-        <!-- Products Table -->
-        <div class="admin-table-wrap">
-          <table class="admin-table" id="admin-products-table">
+        <div class="table-wrap overflowable">
+          <table class="data-table" id="products-table">
             <thead>
               <tr>
-                <th>ID</th>
-                <th>Name</th>
+                <th>Product</th>
                 <th>Brand</th>
                 <th>Category</th>
-                <th>Tags</th>
+                <th>Collection</th>
+                <th>MRP</th>
+                <th>W.Price</th>
                 <th>Status</th>
                 <th>Actions</th>
               </tr>
             </thead>
-            <tbody id="admin-products-tbody">
-              <tr><td colspan="7" class="admin-table-loading">Loading products…</td></tr>
+            <tbody id="products-tbody">
+              <tr><td colspan="8" class="td-loading">Loading products…</td></tr>
             </tbody>
           </table>
         </div>
-      </div>
+        <div class="pagination" id="products-pagination"></div>
+      </section>
 
-      <!-- ═══ TAB: CATEGORIES ═══ -->
-      <div class="admin-tab" id="tab-categories" style="display:none;">
-        <div class="admin-page-header">
-          <div>
-            <h2 class="admin-page-title">Categories</h2>
-            <p class="admin-page-sub">Manage product categories. Categories are used to organise products on the website.</p>
+      <!-- ═══ SECTION: CATEGORIES ════════════════════════════════════════ -->
+      <section class="admin-section" id="section-categories">
+        <div class="page-header">
+          <div class="page-header-info">
+            <h1 class="page-title">Categories</h1>
+            <p class="page-subtitle">Manage product categories and hierarchy</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-primary" id="btn-add-category">+ Add Category</button>
           </div>
         </div>
-        <div class="admin-info-panel">
-          <h3>&#128193; Current Categories</h3>
-          <div class="admin-categories-grid" id="admin-categories-grid">
-            <div class="admin-cat-chip">🍽️ Crockery &amp; Dinnerware</div>
-            <div class="admin-cat-chip">🍴 Cutlery</div>
-            <div class="admin-cat-chip">🥂 Glassware &amp; Bottles</div>
-            <div class="admin-cat-chip">🥣 Melamineware</div>
-            <div class="admin-cat-chip">🥤 Acrylicware</div>
-            <div class="admin-cat-chip">🍳 Kitchenware</div>
-            <div class="admin-cat-chip">🪵 Wooden Handicrafts</div>
-          </div>
-          <div class="admin-info-note">
-            <p>&#8505; <strong>Note:</strong> Category management (add/rename/reorder) will be available when the backend database is connected. For now, categories are managed in code. To add a new category, update both <code>frontend/products.html</code> (chip list) and <code>admin/index.html</code> (filter dropdowns) and redeploy.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- ═══ TAB: BRANDS ═══ -->
-      <div class="admin-tab" id="tab-brands" style="display:none;">
-        <div class="admin-page-header">
-          <div>
-            <h2 class="admin-page-title">Brands</h2>
-            <p class="admin-page-sub" id="admin-brand-count">Loading…</p>
-          </div>
-          <button class="admin-btn admin-btn-primary" id="btn-add-brand">+ Add Brand</button>
-        </div>
-        <div class="admin-table-wrap">
-          <table class="admin-table" id="admin-brands-table">
-            <thead><tr><th>ID</th><th>Name</th><th>Own Brand?</th><th>Status</th><th>Actions</th></tr></thead>
-            <tbody id="admin-brands-tbody">
-              <tr><td colspan="5" class="admin-table-loading">Loading brands…</td></tr>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Slug</th>
+                <th>Parent</th>
+                <th>Products</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="categories-tbody">
+              <tr><td colspan="6" class="td-loading">Loading…</td></tr>
             </tbody>
           </table>
         </div>
-      </div>
+      </section>
 
-      <!-- ═══ TAB: ENQUIRIES ═══ -->
-      <div class="admin-tab" id="tab-enquiries" style="display:none;">
-        <div class="admin-page-header">
-          <div>
-            <h2 class="admin-page-title">Enquiries</h2>
-            <p class="admin-page-sub">Customer enquiries submitted via the website contact form.</p>
+      <!-- ═══ SECTION: BRANDS ════════════════════════════════════════════ -->
+      <section class="admin-section" id="section-brands">
+        <div class="page-header">
+          <div class="page-header-info">
+            <h1 class="page-title">Brands</h1>
+            <p class="page-subtitle" id="brands-count">Loading…</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-primary" id="btn-add-brand">+ Add Brand</button>
           </div>
         </div>
-        <div class="admin-info-panel">
-          <h3>&#128386; Enquiry Management</h3>
-          <p>This section will display all customer enquiries once a backend/database is connected.</p>
-          <div class="admin-enquiry-placeholder">
-            <span class="admin-enquiry-placeholder-icon">&#128386;</span>
-            <h4>No Backend Connected Yet</h4>
-            <p>Enquiries submitted via the Contact Us form currently go directly to WhatsApp. Once a backend is integrated, enquiries will be stored here for tracking and follow-up.</p>
-            <div class="admin-info-note" style="margin-top:16px;">
-              <p>&#8505; <strong>Planned features:</strong> View enquiries, mark as read/replied, filter by date or category, export to CSV, and assign to staff members.</p>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Brand</th>
+                <th>Slug</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="brands-tbody">
+              <tr><td colspan="5" class="td-loading">Loading…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ═══ SECTION: CATALOGUES ════════════════════════════════════════ -->
+      <section class="admin-section" id="section-catalogues">
+        <div class="page-header">
+          <div class="page-header-info">
+            <h1 class="page-title">Catalogues</h1>
+            <p class="page-subtitle">Manage PDF catalogues available to customers</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-primary" id="btn-add-catalogue">+ Upload Catalogue</button>
+          </div>
+        </div>
+        <div class="catalogue-grid" id="catalogues-grid">
+          <div style="color:var(--c-muted);font-size:13px;padding:20px;">Loading catalogues…</div>
+        </div>
+        <div id="catalogues-list-wrap" style="margin-top:28px;">
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">All Catalogues</span>
+            </div>
+            <div class="table-wrap" style="border:0;border-radius:0;box-shadow:none;">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Version</th>
+                    <th>File</th>
+                    <th>Status</th>
+                    <th>Created</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="catalogues-tbody">
+                  <tr><td colspan="6" class="td-loading">Loading…</td></tr>
+                </tbody>
+              </table>
             </div>
           </div>
-          <div class="admin-enquiry-whatsapp-note">
-            <h4>&#128241; Current Enquiries via WhatsApp</h4>
-            <p>All current customer enquiries arrive through WhatsApp at <strong>+91 88704 13413</strong>. Open WhatsApp Business to view and respond.</p>
-            <a href="https://wa.me/918870413413" class="admin-btn admin-btn-secondary" target="_blank" rel="noopener">Open WhatsApp &#8594;</a>
-          </div>
         </div>
-      </div>
+      </section>
 
-      <!-- ═══ TAB: EXPORT / IMPORT ═══ -->
-      <div class="admin-tab" id="tab-export" style="display:none;">
-        <div class="admin-page-header">
-          <h2 class="admin-page-title">Export &amp; Import Data</h2>
-        </div>
-        <div class="admin-export-grid">
-          <div class="admin-export-card">
-            <h3>&#128190; Export Products JSON</h3>
-            <p>Download the current products data as a <code>products.json</code> file. Replace the file at <code>frontend/data/products.json</code> to update the live site.</p>
-            <button class="admin-btn admin-btn-primary" id="btn-export-products">Download products.json</button>
-          </div>
-          <div class="admin-export-card">
-            <h3>&#128190; Export Brands JSON</h3>
-            <p>Download the current brands data as a <code>brands.json</code> file. Replace the file at <code>frontend/data/brands.json</code> to update the live site.</p>
-            <button class="admin-btn admin-btn-primary" id="btn-export-brands">Download brands.json</button>
-          </div>
-          <div class="admin-export-card">
-            <h3>&#128196; Import Products CSV</h3>
-            <p>Upload a CSV file with product data. Columns: <code>id, name, brand, category, tags, material, capacity, active</code></p>
-            <input type="file" id="csv-import-input" accept=".csv" class="admin-file-input" />
-            <button class="admin-btn admin-btn-secondary" id="btn-import-csv">Parse CSV &#8594;</button>
-            <div id="csv-import-preview" class="admin-csv-preview" style="display:none;"></div>
-          </div>
-          <div class="admin-export-card admin-export-card--info">
-            <h3>&#8505; How to Update the Live Site</h3>
-            <ol>
-              <li>Use the admin panel to add/edit products and brands</li>
-              <li>Click "Download products.json" or "Download brands.json"</li>
-              <li>Replace the files in the <code>frontend/data/</code> folder of the website</li>
-              <li>The website will automatically show the updated data</li>
-            </ol>
-            <p><strong>Note:</strong> Changes made here are stored in your browser (localStorage) until you export. Data is NOT lost on page refresh.</p>
+      <!-- ═══ SECTION: HOMEPAGE MANAGEMENT ══════════════════════════════ -->
+      <section class="admin-section" id="section-homepage">
+        <div class="page-header">
+          <div class="page-header-info">
+            <h1 class="page-title">Homepage Management</h1>
+            <p class="page-subtitle">Control banners, featured products, reviews, and homepage sections</p>
           </div>
         </div>
-      </div>
 
-      <!-- ═══ TAB: SETTINGS ═══ -->
-      <div class="admin-tab" id="tab-settings" style="display:none;">
-        <div class="admin-page-header">
-          <h2 class="admin-page-title">Settings</h2>
+        <div class="inner-tabs">
+          <button class="inner-tab active" data-hptab="banners">🖼 Banners</button>
+          <button class="inner-tab" data-hptab="featured">⭐ Featured Products</button>
+          <button class="inner-tab" data-hptab="new-arrivals">🆕 New Arrivals</button>
+          <button class="inner-tab" data-hptab="reviews">💬 Reviews</button>
         </div>
-        <div class="admin-settings-card">
-          <h3>Change Admin Password</h3>
-          <form id="change-password-form" novalidate>
-            <div class="admin-form-group"><label for="current-password">Current Password</label><input type="password" id="current-password" class="admin-input" /></div>
-            <div class="admin-form-group"><label for="new-password">New Password</label><input type="password" id="new-password" class="admin-input" /></div>
-            <div class="admin-form-group"><label for="confirm-password">Confirm New Password</label><input type="password" id="confirm-password" class="admin-input" /></div>
-            <button type="submit" class="admin-btn admin-btn-primary">Update Password</button>
-            <p class="admin-settings-msg" id="password-msg" aria-live="polite"></p>
-          </form>
-        </div>
-        <div class="admin-settings-card">
-          <h3>&#9888; Reset All Data</h3>
-          <p>This will clear all changes made in this browser session and reset to the original data files.</p>
-          <button class="admin-btn admin-btn-danger" id="btn-reset-data">Reset to Original Data</button>
-        </div>
-        <div class="admin-settings-card">
-          <h3>&#128279; API / Backend Configuration</h3>
-          <p>Once a backend is connected, configure the API URL here. The <code>data-api-url</code> attribute on the dashboard div controls where data is fetched from.</p>
-          <div class="admin-form-group">
-            <label for="api-url-input">API Base URL</label>
-            <input type="text" id="api-url-input" class="admin-input" placeholder="https://api.yourdomain.com/v1 (leave blank to use localStorage)" />
-          </div>
-          <button class="admin-btn admin-btn-secondary" id="btn-save-api-url">Save API URL</button>
-          <p class="admin-settings-msg" id="api-url-msg" aria-live="polite"></p>
-        </div>
-      </div>
 
-    </main>
-  </div>
-
-  <!-- ═══ PRODUCT MODAL ═══ -->
-  <div class="admin-modal-overlay" id="product-modal-overlay" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="product-modal-title">
-    <div class="admin-modal">
-      <div class="admin-modal-header">
-        <h3 class="admin-modal-title" id="product-modal-title">Add Product</h3>
-        <button class="admin-modal-close" id="product-modal-close" aria-label="Close">&#10005;</button>
-      </div>
-      <div class="admin-modal-body">
-        <form id="product-form" novalidate>
-          <input type="hidden" id="pf-index" value="" />
-          <div class="admin-form-row">
-            <div class="admin-form-group"><label for="pf-id">Product ID / Code *</label><input type="text" id="pf-id" class="admin-input" placeholder="e.g. NCH-011" required /></div>
-            <div class="admin-form-group"><label for="pf-name">Product Name *</label><input type="text" id="pf-name" class="admin-input" placeholder="Full product name" required /></div>
+        <!-- Banners sub-tab -->
+        <div id="hptab-banners">
+          <div class="page-actions" style="margin-bottom:16px;">
+            <button class="btn btn-primary" id="btn-add-banner">+ Add Banner</button>
           </div>
-          <div class="admin-form-row">
-            <div class="admin-form-group"><label for="pf-brand">Brand</label><input type="text" id="pf-brand" class="admin-input" placeholder="Brand name (or 'taroba')" /></div>
-            <div class="admin-form-group"><label for="pf-category">Category *</label>
-              <select id="pf-category" class="admin-select" required>
-                <option value="">Select category</option>
-                <option value="crockery">Crockery &amp; Dinnerware</option>
-                <option value="cutlery">Cutlery</option>
-                <option value="glassware">Glassware &amp; Bottles</option>
-                <option value="melamineware">Melamineware</option>
-                <option value="acrylicware">Acrylicware</option>
-                <option value="kitchenware">Kitchenware</option>
-                <option value="wooden-handicrafts">Wooden Handicrafts</option>
-              </select>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Order</th>
+                  <th>Title</th>
+                  <th>Subtitle</th>
+                  <th>Button</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="banners-tbody">
+                <tr><td colspan="6" class="td-loading">Loading…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Featured sub-tab -->
+        <div id="hptab-featured" class="hidden">
+          <div style="margin-bottom:16px;">
+            <p style="font-size:13px;color:var(--c-muted);">Products marked as Featured appear in the Featured section on the homepage. Toggle directly from the products table or use the bulk tool below.</p>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr><th>Product</th><th>Brand</th><th>Category</th><th>Featured</th><th>Actions</th></tr>
+              </thead>
+              <tbody id="featured-tbody">
+                <tr><td colspan="5" class="td-loading">Loading…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- New Arrivals sub-tab -->
+        <div id="hptab-new-arrivals" class="hidden">
+          <div style="margin-bottom:16px;">
+            <p style="font-size:13px;color:var(--c-muted);">Products marked as New Arrivals appear in the New Arrivals section. Manage them from the Products page or toggle below.</p>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr><th>Product</th><th>Brand</th><th>Category</th><th>New Arrival</th><th>Actions</th></tr>
+              </thead>
+              <tbody id="new-arrivals-tbody">
+                <tr><td colspan="5" class="td-loading">Loading…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Reviews sub-tab -->
+        <div id="hptab-reviews" class="hidden">
+          <div class="page-actions" style="margin-bottom:16px;">
+            <button class="btn btn-primary" id="btn-add-review">+ Add Review</button>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Customer</th>
+                  <th>Business</th>
+                  <th>Type</th>
+                  <th>Rating</th>
+                  <th>Review</th>
+                  <th>Published</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="reviews-tbody">
+                <tr><td colspan="7" class="td-loading">Loading…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ SECTION: ENQUIRIES ═════════════════════════════════════════ -->
+      <section class="admin-section" id="section-enquiries">
+        <div class="page-header">
+          <div class="page-header-info">
+            <h1 class="page-title">Enquiries</h1>
+            <p class="page-subtitle" id="enquiries-count">Loading…</p>
+          </div>
+          <div class="page-actions">
+            <select class="filter-select" id="enquiry-filter-status">
+              <option value="all">All Status</option>
+              <option value="NEW">New</option>
+              <option value="CONTACTED">Contacted</option>
+              <option value="IN_PROGRESS">In Progress</option>
+              <option value="COMPLETED">Completed</option>
+              <option value="CLOSED">Closed</option>
+            </select>
+            <button class="btn btn-ghost btn-sm" onclick="exportEnquiries()">⬇ Export CSV</button>
+          </div>
+        </div>
+        <div class="table-wrap overflowable">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Customer</th>
+                <th>Company</th>
+                <th>Type</th>
+                <th>Product / Message</th>
+                <th>Qty</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="enquiries-tbody">
+              <tr><td colspan="8" class="td-loading">Loading…</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagination" id="enquiries-pagination"></div>
+      </section>
+
+      <!-- ═══ SECTION: CUSTOMERS ════════════════════════════════════════ -->
+      <section class="admin-section" id="section-customers">
+        <div class="page-header">
+          <div class="page-header-info">
+            <h1 class="page-title">Customers</h1>
+            <p class="page-subtitle">Unique customers derived from enquiries and sales records</p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Company</th>
+                <th>Type</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Enquiries</th>
+                <th>Last Contact</th>
+              </tr>
+            </thead>
+            <tbody id="customers-tbody">
+              <tr><td colspan="7" class="td-loading">Loading…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ═══ SECTION: SALES ════════════════════════════════════════════ -->
+      <section class="admin-section" id="section-sales">
+        <div class="page-header">
+          <div class="page-header-info">
+            <h1 class="page-title">Sales</h1>
+            <p class="page-subtitle" id="sales-count">B2B manually recorded orders</p>
+          </div>
+          <div class="page-actions">
+            <select class="filter-select" id="sale-filter-status">
+              <option value="all">All Status</option>
+              <option value="QUOTE">Quote</option>
+              <option value="CONFIRMED">Confirmed</option>
+              <option value="PROCESSING">Processing</option>
+              <option value="DELIVERED">Delivered</option>
+              <option value="CANCELLED">Cancelled</option>
+            </select>
+            <button class="btn btn-primary" id="btn-add-sale">+ New Sale</button>
+          </div>
+        </div>
+
+        <!-- Sales Stats -->
+        <div class="stats-grid" id="sales-stats" style="margin-bottom:20px;grid-template-columns:repeat(5,1fr);"></div>
+
+        <div class="table-wrap overflowable">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Sale #</th>
+                <th>Customer</th>
+                <th>Company</th>
+                <th>Items</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="sales-tbody">
+              <tr><td colspan="8" class="td-loading">Loading…</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagination" id="sales-pagination"></div>
+      </section>
+
+      <!-- ═══ SECTION: REPORTS ═══════════════════════════════════════════ -->
+      <section class="admin-section" id="section-reports">
+        <div class="page-header">
+          <div class="page-header-info">
+            <h1 class="page-title">Reports</h1>
+            <p class="page-subtitle">Business insights and data summaries</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-ghost btn-sm" onclick="exportReport()">⬇ Export Report</button>
+          </div>
+        </div>
+        <div class="report-grid">
+          <div class="card">
+            <div class="card-header"><span class="card-title">📦 Product Breakdown</span></div>
+            <div class="card-body" id="report-products"></div>
+          </div>
+          <div class="card">
+            <div class="card-header"><span class="card-title">💬 Enquiry Breakdown</span></div>
+            <div class="card-body" id="report-enquiries"></div>
+          </div>
+          <div class="card">
+            <div class="card-header"><span class="card-title">💼 Sales Breakdown</span></div>
+            <div class="card-body" id="report-sales"></div>
+          </div>
+          <div class="card">
+            <div class="card-header"><span class="card-title">🏷 Top Categories</span></div>
+            <div class="card-body" id="report-categories"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══ SECTION: AUDIT LOGS ════════════════════════════════════════ -->
+      <section class="admin-section" id="section-auditlogs">
+        <div class="page-header">
+          <div class="page-header-info">
+            <h1 class="page-title">Audit Logs</h1>
+            <p class="page-subtitle">Track all administrative actions</p>
+          </div>
+          <div class="page-actions">
+            <select class="filter-select" id="audit-filter-action">
+              <option value="all">All Actions</option>
+              <option value="LOGIN">Login</option>
+              <option value="LOGOUT">Logout</option>
+              <option value="CREATE">Create</option>
+              <option value="UPDATE">Update</option>
+              <option value="DELETE">Delete</option>
+              <option value="PRICE_CHANGE">Price Change</option>
+              <option value="IMPORT">Import</option>
+              <option value="CATALOGUE_UPLOAD">Catalogue Upload</option>
+              <option value="HOMEPAGE_CHANGE">Homepage Change</option>
+              <option value="SALE_CHANGE">Sale Change</option>
+              <option value="SETTINGS_CHANGE">Settings Change</option>
+            </select>
+            <select class="filter-select" id="audit-filter-entity">
+              <option value="all">All Entities</option>
+              <option value="Product">Product</option>
+              <option value="Category">Category</option>
+              <option value="Brand">Brand</option>
+              <option value="Enquiry">Enquiry</option>
+              <option value="Sale">Sale</option>
+              <option value="Banner">Banner</option>
+              <option value="Catalogue">Catalogue</option>
+              <option value="User">User</option>
+              <option value="SiteSettings">Settings</option>
+            </select>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Time</th>
+                <th>User</th>
+                <th>Action</th>
+                <th>Entity</th>
+                <th>Details</th>
+                <th>IP Address</th>
+              </tr>
+            </thead>
+            <tbody id="auditlogs-tbody">
+              <tr><td colspan="6" class="td-loading">Loading…</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagination" id="auditlogs-pagination"></div>
+      </section>
+      <!-- ═══ SECTION: SHOP GALLERY ═══════════════════════════════════════ -->
+      <section class="admin-section" id="section-shop-gallery">
+        <div class="page-header">
+          <div class="page-header-info">
+            <h1 class="page-title">Shop Gallery</h1>
+            <p class="page-subtitle">Upload photos and videos of your showroom — they appear on the Contact page</p>
+          </div>
+          <div class="page-actions">
+            <button class="btn btn-primary" id="btn-open-gallery-upload" onclick="openGalleryUpload()">+ Upload Media</button>
+          </div>
+        </div>
+
+        <!-- Upload Form (hidden by default) -->
+        <div class="card" id="gallery-upload-form-wrap" style="display:none;margin-bottom:24px;">
+          <div class="card-header">
+            <span class="card-title">📤 Upload Photo / Video</span>
+            <button class="btn btn-sm" onclick="closeGalleryUpload()" style="margin-left:auto;">Cancel</button>
+          </div>
+          <div class="card-body">
+            <form id="gallery-upload-form" enctype="multipart/form-data">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+                <div class="form-group">
+                  <label class="form-label">Title (optional)</label>
+                  <input type="text" class="form-input" name="title" id="gallery-title" placeholder="e.g. Main display shelf" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Sort Order</label>
+                  <input type="number" class="form-input" name="sortOrder" id="gallery-sort" value="0" min="0" />
+                </div>
+              </div>
+              <div class="form-group" style="margin-bottom:16px;">
+                <label class="form-label">Description (optional)</label>
+                <input type="text" class="form-input" name="description" id="gallery-desc" placeholder="Short description shown on hover" />
+              </div>
+              <div class="form-group" style="margin-bottom:20px;">
+                <label class="form-label">File <span style="color:var(--danger,red)">*</span></label>
+                <input type="file" class="form-input" name="file" id="gallery-file" accept="image/jpeg,image/png,image/webp,video/mp4,video/webm,video/quicktime" required />
+                <p style="font-size:.78rem;color:#888;margin-top:4px;">Images: JPEG, PNG, WebP (max 10 MB) &bull; Videos: MP4, WebM, MOV (max 100 MB)</p>
+              </div>
+              <button type="submit" class="btn btn-primary" id="gallery-submit-btn">Upload</button>
+              <span id="gallery-upload-status" style="margin-left:12px;font-size:.85rem;"></span>
+            </form>
+          </div>
+        </div>
+
+        <!-- Media Grid -->
+        <div class="card">
+          <div class="card-header"><span class="card-title">📸 Showroom Media</span></div>
+          <div class="card-body">
+            <div id="gallery-admin-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;">
+              <p style="color:#888;font-size:.9rem;">Loading...</p>
             </div>
           </div>
-          <div class="admin-form-row">
-            <div class="admin-form-group"><label for="pf-material">Material</label><input type="text" id="pf-material" class="admin-input" placeholder="e.g. Borosilicate Glass" /></div>
-            <div class="admin-form-group"><label for="pf-capacity">Capacity / Dimensions</label><input type="text" id="pf-capacity" class="admin-input" placeholder="e.g. 350ml or 25x10cm" /></div>
+        </div>
+      </section>
+
+      <!-- ═══ SECTION: SETTINGS ══════════════════════════════════════════ -->
+      <section class="admin-section" id="section-settings">
+        <div class="page-header">
+          <div class="page-header-info">
+            <h1 class="page-title">Settings</h1>
+            <p class="page-subtitle">Business information, contact details, and site configuration</p>
           </div>
-          <div class="admin-form-group"><label for="pf-set-contents">Set Contents</label><input type="text" id="pf-set-contents" class="admin-input" placeholder="e.g. 6 pieces (1 plate + 1 bowl + 4 cups)" /></div>
-          <div class="admin-form-group"><label for="pf-packaging">Packaging</label><input type="text" id="pf-packaging" class="admin-input" placeholder="e.g. Gift box, 12 pcs/carton" /></div>
-          <div class="admin-form-group"><label for="pf-features">Key Features (comma-separated)</label><input type="text" id="pf-features" class="admin-input" placeholder="e.g. Dishwasher safe, Break-resistant, Food-grade" /></div>
-          <div class="admin-form-group"><label for="pf-images">Image Paths (comma-separated)</label><input type="text" id="pf-images" class="admin-input" placeholder="assets/images/products/nch-011-1.jpg, assets/images/products/nch-011-2.jpg" /></div>
-          <div class="admin-form-row">
-            <div class="admin-form-group"><label for="pf-mrp">MRP (optional)</label><input type="number" id="pf-mrp" class="admin-input" placeholder="Leave blank for 'Enquire for Price'" min="0" step="0.01" /></div>
-            <div class="admin-form-group admin-form-group--checkbox">
-              <label class="admin-checkbox-label"><input type="checkbox" id="pf-featured" /> Featured Product</label>
-              <label class="admin-checkbox-label"><input type="checkbox" id="pf-new-arrival" /> New Arrival</label>
-              <label class="admin-checkbox-label"><input type="checkbox" id="pf-active" checked /> Active (show on site)</label>
+          <div class="page-actions">
+            <button class="btn btn-primary" id="btn-save-settings">Save Settings</button>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;" id="settings-container">
+          <div class="card">
+            <div class="card-header"><span class="card-title">🏢 Business Information</span></div>
+            <div class="card-body">
+              <form id="settings-form" class="form-grid">
+                <div class="form-group form-full">
+                  <label class="form-label">Business Name</label>
+                  <input type="text" class="form-input" id="s-businessName" name="businessName" placeholder="Neha Crockery House" />
+                </div>
+                <div class="form-group form-full">
+                  <label class="form-label">Tagline</label>
+                  <input type="text" class="form-input" id="s-tagline" name="tagline" placeholder="India's premium crockery destination" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Phone</label>
+                  <input type="text" class="form-input" id="s-phone" name="phone" placeholder="+91 88704 13413" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">WhatsApp</label>
+                  <input type="text" class="form-input" id="s-whatsapp" name="whatsapp" placeholder="+91 88704 13413" />
+                </div>
+                <div class="form-group form-full">
+                  <label class="form-label">Email</label>
+                  <input type="email" class="form-input" id="s-email" name="email" placeholder="contact@nehacrockery.com" />
+                </div>
+                <div class="form-group form-full">
+                  <label class="form-label">Office Address</label>
+                  <textarea class="form-textarea" id="s-address" name="address" rows="2" placeholder="Shop address..."></textarea>
+                </div>
+                <div class="form-group form-full">
+                  <label class="form-label">Warehouse Address</label>
+                  <textarea class="form-textarea" id="s-warehouseAddress" name="warehouseAddress" rows="2" placeholder="Warehouse address..."></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Business Hours</label>
+                  <input type="text" class="form-input" id="s-businessHours" name="businessHours" placeholder="Mon–Sat 9am–7pm" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Google Maps URL</label>
+                  <input type="url" class="form-input" id="s-googleMapsUrl" name="googleMapsUrl" placeholder="https://maps.google.com/..." />
+                </div>
+              </form>
             </div>
           </div>
-          <p class="admin-form-error" id="product-form-error" aria-live="polite"></p>
-        </form>
-      </div>
-      <div class="admin-modal-footer">
-        <button class="admin-btn admin-btn-secondary" id="product-cancel-btn">Cancel</button>
-        <button class="admin-btn admin-btn-primary" id="product-save-btn">Save Product</button>
-      </div>
+
+          <div style="display:flex;flex-direction:column;gap:20px;">
+            <div class="card">
+              <div class="card-header"><span class="card-title">📱 Social Media</span></div>
+              <div class="card-body">
+                <div class="form-grid">
+                  <div class="form-group form-full">
+                    <label class="form-label">Instagram</label>
+                    <input type="url" class="form-input" id="s-instagram" name="instagram" placeholder="https://instagram.com/..." />
+                  </div>
+                  <div class="form-group form-full">
+                    <label class="form-label">Facebook</label>
+                    <input type="url" class="form-input" id="s-facebook" name="facebook" placeholder="https://facebook.com/..." />
+                  </div>
+                  <div class="form-group form-full">
+                    <label class="form-label">YouTube</label>
+                    <input type="url" class="form-input" id="s-youtube" name="youtube" placeholder="https://youtube.com/..." />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header"><span class="card-title">🏛 Legal / GST</span></div>
+              <div class="card-body">
+                <div class="form-grid">
+                  <div class="form-group form-full">
+                    <label class="form-label">GST Number</label>
+                    <input type="text" class="form-input" id="s-gstNumber" name="gstNumber" placeholder="22AAAAA0000A1Z5" />
+                  </div>
+                  <div class="form-group form-full">
+                    <label class="form-label">PAN Number</label>
+                    <input type="text" class="form-input" id="s-panNumber" name="panNumber" placeholder="AAAAA0000A" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header"><span class="card-title">🔑 Change Password</span></div>
+              <div class="card-body">
+                <form id="password-form" class="form-grid">
+                  <div class="form-group form-full">
+                    <label class="form-label">New Password</label>
+                    <input type="password" class="form-input" id="new-password" placeholder="Enter new password" />
+                  </div>
+                  <div class="form-group form-full">
+                    <label class="form-label">Confirm Password</label>
+                    <input type="password" class="form-input" id="confirm-password" placeholder="Confirm new password" />
+                  </div>
+                  <button type="submit" class="btn btn-ghost form-full">Update Password</button>
+                  <p class="form-error form-full" id="pw-msg"></p>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div><!-- /page-content -->
+  </div><!-- /main-content -->
+</div><!-- /admin-app -->
+
+<!-- ═══ TOAST CONTAINER ═══════════════════════════════════════════════════ -->
+<div id="toast-container"></div>
+
+<!-- ═══ PRODUCT MODAL ══════════════════════════════════════════════════════ -->
+<div class="modal-overlay hidden" id="product-modal">
+  <div class="modal modal-xl">
+    <div class="modal-header">
+      <h2 class="modal-title" id="product-modal-title">Add Product</h2>
+      <button class="modal-close" data-close="product-modal">✕</button>
+    </div>
+    <div class="modal-body">
+      <form id="product-form" novalidate>
+        <input type="hidden" id="pf-id" />
+        <div class="form-grid form-grid-2" style="gap:16px;">
+          <div class="form-full">
+            <p class="form-section-title">Basic Information</p>
+          </div>
+          <div class="form-group form-full">
+            <label class="form-label required">Product Name</label>
+            <input type="text" class="form-input" id="pf-name" placeholder="Full product name" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Product Code / Art No.</label>
+            <input type="text" class="form-input" id="pf-code" placeholder="e.g. NCH-0123" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Collection / Series</label>
+            <input type="text" class="form-input" id="pf-collection" placeholder="e.g. Royal, Floral, Classic" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Brand</label>
+            <select class="form-select" id="pf-brand">
+              <option value="">— None —</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Category</label>
+            <select class="form-select" id="pf-category">
+              <option value="">— None —</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Subcategory</label>
+            <input type="text" class="form-input" id="pf-subcategory" placeholder="e.g. Dinner Plates" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Colour / Finish</label>
+            <input type="text" class="form-input" id="pf-colour" placeholder="e.g. White, Blue Floral" />
+          </div>
+
+          <div class="form-full">
+            <p class="form-section-title">Physical Attributes</p>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Material</label>
+            <input type="text" class="form-input" id="pf-material" placeholder="e.g. Borosilicate Glass, Melamine" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Capacity</label>
+            <input type="text" class="form-input" id="pf-capacity" placeholder="e.g. 350ml" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Dimensions</label>
+            <input type="text" class="form-input" id="pf-dimensions" placeholder="e.g. 25×18×5 cm" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Set Contents</label>
+            <input type="text" class="form-input" id="pf-set-contents" placeholder="e.g. 6 plates + 6 bowls" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Pieces per Set</label>
+            <input type="number" class="form-input" id="pf-pieces" placeholder="e.g. 12" min="1" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Case / Carton Qty</label>
+            <input type="number" class="form-input" id="pf-case-qty" placeholder="e.g. 6" min="1" />
+          </div>
+          <div class="form-group form-full">
+            <label class="form-label">Packaging Information</label>
+            <input type="text" class="form-input" id="pf-packaging" placeholder="e.g. Gift box, foam inner, 6 sets/carton" />
+          </div>
+          <div class="form-group form-full">
+            <label class="form-label">Key Features (comma-separated)</label>
+            <input type="text" class="form-input" id="pf-features" placeholder="e.g. Dishwasher safe, Break-resistant, Food-grade" />
+          </div>
+
+          <div class="form-full">
+            <p class="form-section-title">Pricing</p>
+          </div>
+          <div class="form-group">
+            <label class="form-label">MRP (₹)</label>
+            <input type="number" class="form-input" id="pf-mrp" placeholder="Leave blank = Enquire" min="0" step="0.01" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Catalogue MRP (₹)</label>
+            <input type="number" class="form-input" id="pf-catalogue-mrp" placeholder="Printed catalogue price" min="0" step="0.01" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Website Price (₹)</label>
+            <input type="number" class="form-input" id="pf-website-price" placeholder="Price shown on website" min="0" step="0.01" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Wholesale Price (₹)</label>
+            <input type="number" class="form-input" id="pf-wholesale-price" placeholder="B2B wholesale price" min="0" step="0.01" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Price Unit</label>
+            <input type="text" class="form-input" id="pf-price-unit" placeholder="e.g. per piece, per set, per dozen" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Catalogue Page</label>
+            <input type="text" class="form-input" id="pf-catalogue-page" placeholder="e.g. p. 24" />
+          </div>
+
+          <div class="form-full">
+            <p class="form-section-title">SEO</p>
+          </div>
+          <div class="form-group form-full">
+            <label class="form-label">SEO Title</label>
+            <input type="text" class="form-input" id="pf-seo-title" placeholder="SEO page title (optional)" />
+          </div>
+          <div class="form-group form-full">
+            <label class="form-label">SEO Description</label>
+            <textarea class="form-textarea" id="pf-seo-desc" rows="2" placeholder="SEO meta description (optional)"></textarea>
+          </div>
+          <div class="form-group form-full">
+            <label class="form-label">Description</label>
+            <textarea class="form-textarea" id="pf-description" rows="3" placeholder="Product description…"></textarea>
+          </div>
+
+          <div class="form-full">
+            <p class="form-section-title">Flags</p>
+          </div>
+          <div class="form-full">
+            <div class="checkbox-row">
+              <label class="checkbox-group">
+                <input type="checkbox" id="pf-featured" />
+                <span>⭐ Featured Product</span>
+              </label>
+              <label class="checkbox-group">
+                <input type="checkbox" id="pf-new-arrival" />
+                <span>🆕 New Arrival</span>
+              </label>
+              <label class="checkbox-group">
+                <input type="checkbox" id="pf-active" checked />
+                <span>✅ Active (visible on site)</span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <p class="form-error" id="product-form-error"></p>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" data-close="product-modal">Cancel</button>
+      <button class="btn btn-primary" id="product-save-btn">Save Product</button>
     </div>
   </div>
+</div>
 
-  <!-- ═══ BRAND MODAL ═══ -->
-  <div class="admin-modal-overlay" id="brand-modal-overlay" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="brand-modal-title">
-    <div class="admin-modal">
-      <div class="admin-modal-header">
-        <h3 class="admin-modal-title" id="brand-modal-title">Add Brand</h3>
-        <button class="admin-modal-close" id="brand-modal-close" aria-label="Close">&#10005;</button>
-      </div>
-      <div class="admin-modal-body">
-        <form id="brand-form" novalidate>
-          <input type="hidden" id="bf-index" value="" />
-          <div class="admin-form-row">
-            <div class="admin-form-group"><label for="bf-id">Brand ID (slug) *</label><input type="text" id="bf-id" class="admin-input" placeholder="e.g. borosil" required /></div>
-            <div class="admin-form-group"><label for="bf-name">Brand Name *</label><input type="text" id="bf-name" class="admin-input" placeholder="e.g. Borosil" required /></div>
-          </div>
-          <div class="admin-form-group"><label for="bf-tagline">Tagline</label><input type="text" id="bf-tagline" class="admin-input" placeholder="Short brand tagline" /></div>
-          <div class="admin-form-group"><label for="bf-desc">Description</label><textarea id="bf-desc" class="admin-textarea" rows="3" placeholder="Brief brand description…"></textarea></div>
-          <div class="admin-form-group"><label for="bf-logo">Logo Path</label><input type="text" id="bf-logo" class="admin-input" placeholder="assets/images/brands/borosil.png" /></div>
-          <div class="admin-form-group admin-form-group--checkbox">
-            <label class="admin-checkbox-label"><input type="checkbox" id="bf-own-brand" /> Our Own Brand (Taroba etc.)</label>
-            <label class="admin-checkbox-label"><input type="checkbox" id="bf-active" checked /> Active (show on site)</label>
-          </div>
-          <p class="admin-form-error" id="brand-form-error" aria-live="polite"></p>
-        </form>
-      </div>
-      <div class="admin-modal-footer">
-        <button class="admin-btn admin-btn-secondary" id="brand-cancel-btn">Cancel</button>
-        <button class="admin-btn admin-btn-primary" id="brand-save-btn">Save Brand</button>
-      </div>
+<!-- ═══ CATEGORY MODAL ════════════════════════════════════════════════════ -->
+<div class="modal-overlay hidden" id="category-modal">
+  <div class="modal modal-sm">
+    <div class="modal-header">
+      <h2 class="modal-title" id="category-modal-title">Add Category</h2>
+      <button class="modal-close" data-close="category-modal">✕</button>
+    </div>
+    <div class="modal-body">
+      <form id="category-form" class="form-grid">
+        <input type="hidden" id="cf-id" />
+        <div class="form-group form-full">
+          <label class="form-label required">Name</label>
+          <input type="text" class="form-input" id="cf-name" placeholder="e.g. Crockery &amp; Dinnerware" required />
+        </div>
+        <div class="form-group form-full">
+          <label class="form-label">Slug (auto-generated if empty)</label>
+          <input type="text" class="form-input" id="cf-slug" placeholder="e.g. crockery-dinnerware" />
+        </div>
+        <div class="form-group form-full">
+          <label class="form-label">Description</label>
+          <textarea class="form-textarea" id="cf-desc" rows="2" placeholder="Category description…"></textarea>
+        </div>
+        <div class="form-group form-full">
+          <label class="form-label">Parent Category</label>
+          <select class="form-select" id="cf-parent">
+            <option value="">— No Parent (Top Level) —</option>
+          </select>
+        </div>
+        <div class="form-group form-full">
+          <label class="form-label">Sort Order</label>
+          <input type="number" class="form-input" id="cf-sort" value="0" min="0" />
+        </div>
+        <div class="form-full">
+          <label class="checkbox-group">
+            <input type="checkbox" id="cf-active" checked />
+            <span>Active</span>
+          </label>
+        </div>
+        <p class="form-error form-full" id="category-form-error"></p>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" data-close="category-modal">Cancel</button>
+      <button class="btn btn-primary" id="category-save-btn">Save Category</button>
     </div>
   </div>
+</div>
 
-  <!-- Toast -->
-  <div class="admin-toast" id="admin-toast" aria-live="polite"></div>
+<!-- ═══ BRAND MODAL ════════════════════════════════════════════════════════ -->
+<div class="modal-overlay hidden" id="brand-modal">
+  <div class="modal modal-sm">
+    <div class="modal-header">
+      <h2 class="modal-title" id="brand-modal-title">Add Brand</h2>
+      <button class="modal-close" data-close="brand-modal">✕</button>
+    </div>
+    <div class="modal-body">
+      <form id="brand-form" class="form-grid">
+        <input type="hidden" id="bf-id" />
+        <div class="form-group form-full">
+          <label class="form-label required">Brand Name</label>
+          <input type="text" class="form-input" id="bf-name" placeholder="e.g. Borosil" required />
+        </div>
+        <div class="form-group form-full">
+          <label class="form-label">Slug (auto if empty)</label>
+          <input type="text" class="form-input" id="bf-slug" placeholder="e.g. borosil" />
+        </div>
+        <div class="form-group form-full">
+          <label class="form-label">Description</label>
+          <textarea class="form-textarea" id="bf-desc" rows="2" placeholder="Brand description…"></textarea>
+        </div>
+        <div class="form-group form-full">
+          <label class="form-label">Website URL</label>
+          <input type="url" class="form-input" id="bf-website" placeholder="https://borosil.com" />
+        </div>
+        <div class="form-group form-full">
+          <label class="form-label">Logo URL</label>
+          <input type="text" class="form-input" id="bf-logo" placeholder="/uploads/images/borosil.png" />
+        </div>
+        <div class="form-group form-full">
+          <label class="form-label">Sort Order</label>
+          <input type="number" class="form-input" id="bf-sort" value="0" min="0" />
+        </div>
+        <div class="form-full checkbox-row">
+          <label class="checkbox-group">
+            <input type="checkbox" id="bf-own" />
+            <span>🏭 Our Own Brand</span>
+          </label>
+          <label class="checkbox-group">
+            <input type="checkbox" id="bf-active" checked />
+            <span>✅ Active</span>
+          </label>
+        </div>
+        <p class="form-error form-full" id="brand-form-error"></p>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" data-close="brand-modal">Cancel</button>
+      <button class="btn btn-primary" id="brand-save-btn">Save Brand</button>
+    </div>
+  </div>
+</div>
 
-  <script type="module" src="scripts/admin.js"></script>
+<!-- ═══ CATALOGUE MODAL ═══════════════════════════════════════════════════ -->
+<div class="modal-overlay hidden" id="catalogue-modal">
+  <div class="modal modal-sm">
+    <div class="modal-header">
+      <h2 class="modal-title" id="catalogue-modal-title">Upload Catalogue</h2>
+      <button class="modal-close" data-close="catalogue-modal">✕</button>
+    </div>
+    <div class="modal-body">
+      <form id="catalogue-form" class="form-grid" enctype="multipart/form-data">
+        <input type="hidden" id="catf-id" />
+        <div class="form-group form-full">
+          <label class="form-label required">Catalogue Title</label>
+          <input type="text" class="form-input" id="catf-title" placeholder="e.g. NCH 2024 Main Catalogue" required />
+        </div>
+        <div class="form-group form-full">
+          <label class="form-label">Version</label>
+          <input type="text" class="form-input" id="catf-version" placeholder="e.g. v3.2 2024" />
+        </div>
+        <div class="form-group form-full" id="catf-file-group">
+          <label class="form-label">PDF File</label>
+          <input type="file" class="form-input" id="catf-file" accept=".pdf" />
+          <p class="form-hint">Upload a PDF file (max 10MB)</p>
+        </div>
+        <div class="form-group form-full" id="catf-url-group">
+          <label class="form-label">Or File URL</label>
+          <input type="text" class="form-input" id="catf-url" placeholder="https://... or /uploads/..." />
+        </div>
+        <div class="form-full">
+          <label class="checkbox-group">
+            <input type="checkbox" id="catf-active" checked />
+            <span>Active (visible to customers)</span>
+          </label>
+        </div>
+        <p class="form-error form-full" id="catalogue-form-error"></p>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" data-close="catalogue-modal">Cancel</button>
+      <button class="btn btn-primary" id="catalogue-save-btn">Save Catalogue</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ BANNER MODAL ══════════════════════════════════════════════════════ -->
+<div class="modal-overlay hidden" id="banner-modal">
+  <div class="modal modal-md">
+    <div class="modal-header">
+      <h2 class="modal-title" id="banner-modal-title">Add Banner</h2>
+      <button class="modal-close" data-close="banner-modal">✕</button>
+    </div>
+    <div class="modal-body">
+      <form id="banner-form" class="form-grid form-grid-2">
+        <input type="hidden" id="bnf-id" />
+        <div class="form-group form-full">
+          <label class="form-label required">Title</label>
+          <input type="text" class="form-input" id="bnf-title" placeholder="e.g. Premium Crockery Collection" required />
+        </div>
+        <div class="form-group form-full">
+          <label class="form-label">Subtitle</label>
+          <input type="text" class="form-input" id="bnf-subtitle" placeholder="e.g. Explore our newest range" />
+        </div>
+        <div class="form-group form-full">
+          <label class="form-label required">Image URL</label>
+          <input type="text" class="form-input" id="bnf-image" placeholder="/uploads/... or https://..." required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Button Text</label>
+          <input type="text" class="form-input" id="bnf-btn-text" placeholder="e.g. Shop Now" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Button URL</label>
+          <input type="text" class="form-input" id="bnf-btn-url" placeholder="/products" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Sort Order</label>
+          <input type="number" class="form-input" id="bnf-sort" value="0" min="0" />
+        </div>
+        <div class="form-group" style="display:flex;align-items:flex-end;">
+          <label class="checkbox-group">
+            <input type="checkbox" id="bnf-active" checked />
+            <span>Active</span>
+          </label>
+        </div>
+        <p class="form-error form-full" id="banner-form-error"></p>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" data-close="banner-modal">Cancel</button>
+      <button class="btn btn-primary" id="banner-save-btn">Save Banner</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ REVIEW MODAL ══════════════════════════════════════════════════════ -->
+<div class="modal-overlay hidden" id="review-modal">
+  <div class="modal modal-md">
+    <div class="modal-header">
+      <h2 class="modal-title" id="review-modal-title">Add Review</h2>
+      <button class="modal-close" data-close="review-modal">✕</button>
+    </div>
+    <div class="modal-body">
+      <form id="review-form" class="form-grid form-grid-2">
+        <input type="hidden" id="rvf-id" />
+        <div class="form-group form-full">
+          <label class="form-label required">Customer Name</label>
+          <input type="text" class="form-input" id="rvf-name" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Business Name</label>
+          <input type="text" class="form-input" id="rvf-business" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Customer Type</label>
+          <select class="form-select" id="rvf-type">
+            <option value="RETAILER">Retailer</option>
+            <option value="WHOLESALER">Wholesaler</option>
+            <option value="HOTEL">Hotel</option>
+            <option value="RESTAURANT">Restaurant</option>
+            <option value="INSTITUTION">Institution</option>
+            <option value="INDIVIDUAL">Individual</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Rating (1–5)</label>
+          <input type="number" class="form-input" id="rvf-rating" value="5" min="1" max="5" />
+        </div>
+        <div class="form-group form-full">
+          <label class="form-label required">Review Text</label>
+          <textarea class="form-textarea" id="rvf-text" rows="3" required></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Source</label>
+          <input type="text" class="form-input" id="rvf-source" placeholder="e.g. Google, WhatsApp, visit" />
+        </div>
+        <div class="form-group" style="display:flex;align-items:flex-end;">
+          <label class="checkbox-group">
+            <input type="checkbox" id="rvf-published" />
+            <span>Published (visible on site)</span>
+          </label>
+        </div>
+        <p class="form-error form-full" id="review-form-error"></p>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" data-close="review-modal">Cancel</button>
+      <button class="btn btn-primary" id="review-save-btn">Save Review</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SALE MODAL ════════════════════════════════════════════════════════ -->
+<div class="modal-overlay hidden" id="sale-modal">
+  <div class="modal modal-lg">
+    <div class="modal-header">
+      <h2 class="modal-title" id="sale-modal-title">New Sale</h2>
+      <button class="modal-close" data-close="sale-modal">✕</button>
+    </div>
+    <div class="modal-body">
+      <form id="sale-form" class="form-grid form-grid-2">
+        <input type="hidden" id="sf-id" />
+        <div class="form-full">
+          <p class="form-section-title">Customer Details</p>
+        </div>
+        <div class="form-group form-full">
+          <label class="form-label required">Customer Name</label>
+          <input type="text" class="form-input" id="sf-customer" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Company Name</label>
+          <input type="text" class="form-input" id="sf-company" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone</label>
+          <input type="tel" class="form-input" id="sf-phone" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" id="sf-email" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Status</label>
+          <select class="form-select" id="sf-status">
+            <option value="QUOTE">Quote</option>
+            <option value="CONFIRMED">Confirmed</option>
+            <option value="PROCESSING">Processing</option>
+            <option value="DELIVERED">Delivered</option>
+            <option value="CANCELLED">Cancelled</option>
+          </select>
+        </div>
+        <div class="form-group form-full">
+          <label class="form-label">Notes</label>
+          <textarea class="form-textarea" id="sf-notes" rows="2" placeholder="Internal notes…"></textarea>
+        </div>
+
+        <div class="form-full">
+          <p class="form-section-title">Line Items</p>
+        </div>
+        <div class="form-full" id="sale-items-container">
+          <!-- items added dynamically -->
+        </div>
+        <div class="form-full">
+          <button type="button" class="btn btn-ghost btn-sm" id="add-sale-item">+ Add Item</button>
+        </div>
+        <div class="form-full" style="text-align:right;">
+          <strong style="font-size:16px;">Total: <span id="sale-total">₹0.00</span></strong>
+        </div>
+        <p class="form-error form-full" id="sale-form-error"></p>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" data-close="sale-modal">Cancel</button>
+      <button class="btn btn-primary" id="sale-save-btn">Save Sale</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ENQUIRY DETAIL MODAL ══════════════════════════════════════════════ -->
+<div class="modal-overlay hidden" id="enquiry-modal">
+  <div class="modal modal-md">
+    <div class="modal-header">
+      <h2 class="modal-title">Enquiry Details</h2>
+      <button class="modal-close" data-close="enquiry-modal">✕</button>
+    </div>
+    <div class="modal-body" id="enquiry-modal-body">
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" data-close="enquiry-modal">Close</button>
+      <select class="filter-select" id="enquiry-status-select">
+        <option value="NEW">New</option>
+        <option value="CONTACTED">Contacted</option>
+        <option value="IN_PROGRESS">In Progress</option>
+        <option value="COMPLETED">Completed</option>
+        <option value="CLOSED">Closed</option>
+      </select>
+      <button class="btn btn-primary" id="enquiry-update-btn">Update Status</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ IMPORT MODAL ══════════════════════════════════════════════════════ -->
+<div class="modal-overlay hidden" id="import-modal">
+  <div class="modal modal-md">
+    <div class="modal-header">
+      <h2 class="modal-title">Import Products</h2>
+      <button class="modal-close" data-close="import-modal">✕</button>
+    </div>
+    <div class="modal-body">
+      <p style="font-size:13px;color:var(--c-muted);margin-bottom:16px;">Upload a CSV or Excel file to bulk import products. Required columns: <code>name</code>. Optional: <code>productCode, brand, category, material, capacity, mrp, collection, isFeatured, isNewArrival</code></p>
+      <div class="upload-zone" id="import-drop-zone">
+        <div style="font-size:36px;margin-bottom:8px;">📁</div>
+        <strong>Drop file here or click to browse</strong>
+        <p>CSV or Excel (.xlsx) files supported</p>
+        <input type="file" id="import-file" accept=".csv,.xlsx,.xls" style="display:none;" />
+      </div>
+      <div id="import-preview" style="margin-top:16px;display:none;"></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" data-close="import-modal">Cancel</button>
+      <button class="btn btn-primary hidden" id="import-submit-btn">Import Products</button>
+    </div>
+  </div>
+</div>
+
+<script src="scripts/admin.js"></script>
 </body>
 </html>

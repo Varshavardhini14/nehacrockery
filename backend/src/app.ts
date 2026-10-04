@@ -17,19 +17,23 @@ import { errorHandler, notFoundHandler } from './middleware/errorHandler';
 
 const app = express();
 
-// ── Security headers ───────────────────────────────────────────────────────────
+// ── Security headers ─────────────────────────────────────────────────────────
 app.use(
   helmet({
     crossOriginResourcePolicy: { policy: 'cross-origin' }, // allow image serving
+    // Relax CSP for dev so admin panel inline styles/scripts work
+    contentSecurityPolicy: config.nodeEnv === 'production',
   }),
 );
 
-// ── CORS ──────────────────────────────────────────────────────────────────────
+// ── CORS ─────────────────────────────────────────────────────────────────────
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin (mobile apps, curl, etc.)
+      // Allow requests with no origin (mobile apps, curl, Postman, etc.)
       if (!origin) return callback(null, true);
+      // Browsers send "null" as the origin for file:// pages — allow it in dev
+      if (origin === 'null' && config.nodeEnv !== 'production') return callback(null, true);
       if (config.cors.origins.includes(origin)) {
         return callback(null, true);
       }
@@ -41,7 +45,7 @@ app.use(
   }),
 );
 
-// ── Global rate limiter ────────────────────────────────────────────────────────
+// ── Global rate limiter ───────────────────────────────────────────────────────
 app.use(
   rateLimit({
     windowMs: config.rateLimit.windowMs,
@@ -52,29 +56,36 @@ app.use(
   }),
 );
 
-// ── Body parsing ───────────────────────────────────────────────────────────────
+// ── Body parsing ─────────────────────────────────────────────────────────────
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(cookieParser());
 app.use(compression());
 
-// ── HTTP request logging ───────────────────────────────────────────────────────
+// ── HTTP request logging ─────────────────────────────────────────────────────
 app.use(
   morgan(config.nodeEnv === 'production' ? 'combined' : 'dev', {
     stream: { write: (message) => logger.http(message.trim()) },
   }),
 );
 
-// ── Static file serving (uploaded assets) ─────────────────────────────────────
+// ── Static file serving (uploaded assets) ────────────────────────────────────
 app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 
-// ── API Routes ─────────────────────────────────────────────────────────────────
+// ── Serve Admin Panel & Frontend at the same origin ──────────────────────────
+//    Admin panel : yourdomain.com/admin/
+//    Frontend    : yourdomain.com/  (root)
+const projectRoot = path.resolve(process.cwd(), '..');
+app.use('/admin', express.static(path.join(projectRoot, 'admin'), { index: 'index.html' }));
+app.use('/',      express.static(path.join(projectRoot, 'frontend'), { index: 'index.html' }));
+
+// ── API Routes ────────────────────────────────────────────────────────────────
 app.use('/api/v1', apiRoutes);
 
-// ── 404 handler ────────────────────────────────────────────────────────────────
+// ── 404 handler ───────────────────────────────────────────────────────────────
 app.use(notFoundHandler);
 
-// ── Centralized error handler (must be last) ───────────────────────────────────
+// ── Centralized error handler (must be last) ──────────────────────────────────
 app.use(errorHandler);
 
 export default app;
