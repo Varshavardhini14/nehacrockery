@@ -4,6 +4,7 @@
 import { Request, Response } from 'express';
 import * as productService from '../services/product.service';
 import * as importService from '../services/import.service';
+import * as storageService from '../services/storage.service';
 import { sendSuccess, sendPaginated, sendCreated, sendNoContent } from '../utils/apiResponse';
 import { AppError } from '../utils/AppError';
 
@@ -57,12 +58,13 @@ export async function adminUploadProductImages(req: Request, res: Response): Pro
   }
 
   const { productId } = req.params;
+
   const images = await Promise.all(
-    files.map((file, index) => {
-      const imageUrl = `/uploads/images/${file.filename}`;
+    files.map(async (file, index) => {
+      // Upload buffer to Supabase Storage → get permanent public URL
+      const { publicUrl } = await storageService.uploadFile('product-images', file, 'products');
       const altText = req.body[`altText_${index}`] as string | undefined;
-      const sortOrder = index;
-      return productService.addProductImage(productId, imageUrl, altText, sortOrder);
+      return productService.addProductImage(productId, publicUrl, altText, index);
     }),
   );
 
@@ -70,6 +72,14 @@ export async function adminUploadProductImages(req: Request, res: Response): Pro
 }
 
 export async function adminDeleteProductImage(req: Request, res: Response): Promise<void> {
+  // Fetch the image record first so we can delete the file from storage too
+  const image = await productService.getProductImageById(req.params.imageId);
+
+  if (image?.imageUrl) {
+    const storagePath = storageService.storagePathFromUrl(image.imageUrl, 'product-images');
+    await storageService.deleteFile('product-images', storagePath);
+  }
+
   await productService.deleteProductImage(req.params.imageId);
   sendNoContent(res);
 }

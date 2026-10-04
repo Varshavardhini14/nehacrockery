@@ -310,6 +310,14 @@ export async function addProductImage(
   });
 }
 
+// ── ADMIN: Get a single product image (for storage deletion) ──────────────────
+export async function getProductImageById(imageId: string) {
+  return prisma.productImage.findUnique({
+    where: { id: imageId },
+    select: { id: true, imageUrl: true },
+  });
+}
+
 // ── ADMIN: Delete product image ───────────────────────────────────────────────
 export async function deleteProductImage(imageId: string) {
   const image = await prisma.productImage.findUnique({

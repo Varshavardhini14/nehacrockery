@@ -1,8 +1,9 @@
 // ─────────────────────────────────────────────────────────────────────────────
-// Site controller — banners, reviews, site settings, catalogues
+// Site controller — banners, reviews, site settings, catalogues, shop gallery
 // ─────────────────────────────────────────────────────────────────────────────
 import { Request, Response } from 'express';
 import * as siteService from '../services/site.service';
+import * as storageService from '../services/storage.service';
 import { sendSuccess, sendCreated, sendNoContent } from '../utils/apiResponse';
 
 // ── BANNERS ───────────────────────────────────────────────────────────────────
@@ -84,13 +85,17 @@ export async function adminListCatalogues(_req: Request, res: Response): Promise
 }
 
 export async function adminCreateCatalogue(req: Request, res: Response): Promise<void> {
-  // File upload via multer sets req.file; plain JSON uses req.body.fileUrl
   const uploadedFile = req.file as Express.Multer.File | undefined;
-  const fileUrl = uploadedFile
-    ? `/uploads/catalogues/${uploadedFile.filename}`
-    : req.body.fileUrl;
 
-  if (!fileUrl) {
+  let fileUrl: string;
+
+  if (uploadedFile) {
+    // Upload PDF buffer to Supabase Storage → catalogues bucket
+    const { publicUrl } = await storageService.uploadFile('catalogues', uploadedFile, 'pdfs');
+    fileUrl = publicUrl;
+  } else if (req.body.fileUrl) {
+    fileUrl = req.body.fileUrl as string;
+  } else {
     res.status(400).json({ success: false, message: 'A PDF file or fileUrl is required' });
     return;
   }
@@ -99,7 +104,12 @@ export async function adminCreateCatalogue(req: Request, res: Response): Promise
     title: req.body.title,
     fileUrl,
     version: req.body.version || null,
-    isActive: req.body.isActive === 'false' ? false : req.body.isActive === 'true' ? true : req.body.isActive ?? true,
+    isActive:
+      req.body.isActive === 'false'
+        ? false
+        : req.body.isActive === 'true'
+          ? true
+          : (req.body.isActive ?? true),
   });
   sendCreated(res, catalogue, 'Catalogue created');
 }
@@ -110,6 +120,12 @@ export async function adminUpdateCatalogue(req: Request, res: Response): Promise
 }
 
 export async function adminDeleteCatalogue(req: Request, res: Response): Promise<void> {
+  // Fetch catalogue so we can delete the PDF from Supabase Storage too
+  const catalogue = await siteService.getCatalogueById(req.params.id);
+  if (catalogue?.fileUrl) {
+    const storagePath = storageService.storagePathFromUrl(catalogue.fileUrl, 'catalogues');
+    await storageService.deleteFile('catalogues', storagePath);
+  }
   await siteService.deleteCatalogue(req.params.id);
   sendNoContent(res);
 }
@@ -136,11 +152,18 @@ export async function adminCreateShopMedia(req: Request, res: Response): Promise
 
   const isVideo = uploadedFile
     ? uploadedFile.mimetype.startsWith('video/')
-    : (req.body.mediaType === 'video');
+    : req.body.mediaType === 'video';
 
-  const mediaUrl = uploadedFile
-    ? `/uploads/shop-gallery/${uploadedFile.filename}`
-    : req.body.mediaUrl;
+  let mediaUrl: string;
+
+  if (uploadedFile) {
+    // Upload to Supabase Storage → shop-gallery bucket
+    const folder = isVideo ? 'videos' : 'photos';
+    const { publicUrl } = await storageService.uploadFile('shop-gallery', uploadedFile, folder);
+    mediaUrl = publicUrl;
+  } else {
+    mediaUrl = req.body.mediaUrl as string;
+  }
 
   const media = await siteService.createShopMedia({
     title: req.body.title || null,
@@ -160,15 +183,23 @@ export async function adminUpdateShopMedia(req: Request, res: Response): Promise
     description: req.body.description,
     thumbnailUrl: req.body.thumbnailUrl,
     sortOrder: req.body.sortOrder !== undefined ? parseInt(req.body.sortOrder, 10) : undefined,
-    isActive: req.body.isActive !== undefined
-      ? req.body.isActive === 'false' ? false : Boolean(req.body.isActive)
-      : undefined,
+    isActive:
+      req.body.isActive !== undefined
+        ? req.body.isActive === 'false'
+          ? false
+          : Boolean(req.body.isActive)
+        : undefined,
   });
   sendSuccess(res, media, 'Shop media updated');
 }
 
 export async function adminDeleteShopMedia(req: Request, res: Response): Promise<void> {
+  // Fetch the record so we can delete the file from Supabase Storage too
+  const media = await siteService.getShopMediaById(req.params.id);
+  if (media?.mediaUrl) {
+    const storagePath = storageService.storagePathFromUrl(media.mediaUrl, 'shop-gallery');
+    await storageService.deleteFile('shop-gallery', storagePath);
+  }
   await siteService.deleteShopMedia(req.params.id);
   sendNoContent(res);
 }
-

@@ -1,0 +1,86 @@
+# =============================================================================
+# Neha Crockery House — Render Blueprint
+# Docs: https://render.com/docs/blueprint-spec
+# =============================================================================
+
+services:
+  - type: web
+    name: neha-crockery-backend
+    runtime: node
+    region: singapore          # closest to India (ap-south-1)
+    plan: free                 # change to "starter" ($7/mo) for always-on
+
+    # ── Source ───────────────────────────────────────────────────────────────
+    rootDir: backend           # Render will cd into backend/ before building
+
+    # ── Build & Start ─────────────────────────────────────────────────────────
+    buildCommand: npm ci && npm run build:render
+    startCommand: npm run start:prod
+
+    # ── Health Check ──────────────────────────────────────────────────────────
+    healthCheckPath: /api/v1/health
+
+    # ── Environment Variables ─────────────────────────────────────────────────
+    # Set these in the Render Dashboard -> Environment tab.
+    # NEVER commit real values here.
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+      - key: PORT
+        value: 10000            # Render always exposes port 10000 internally
+
+      # ── Database (Supabase) ────────────────────────────────────────────────
+      - key: DATABASE_URL
+        sync: false             # fill manually in Render dashboard
+
+      - key: DIRECT_URL
+        sync: false
+
+      # ── JWT ───────────────────────────────────────────────────────────────
+      - key: JWT_SECRET
+        sync: false
+
+      - key: JWT_EXPIRES_IN
+        value: 7d
+
+      - key: JWT_COOKIE_EXPIRES_DAYS
+        value: "7"
+
+      # ── CORS ──────────────────────────────────────────────────────────────
+      # Replace with your real Vercel domain(s) after deploying.
+      # Include both custom domain AND the free .vercel.app subdomain.
+      # Example: https://nehacrockery.com,https://neha-crockery.vercel.app
+      - key: CORS_ORIGINS
+        value: https://nehacrockery.com,https://neha-crockery.vercel.app
+
+      # ── Supabase Auth ─────────────────────────────────────────────────────
+      - key: SUPABASE_URL
+        sync: false
+
+      - key: SUPABASE_ANON_KEY
+        sync: false
+
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+
+      - key: SUPABASE_JWT_SECRET
+        sync: false
+
+      # ── File Uploads ──────────────────────────────────────────────────────
+      # File uploads go to Supabase Storage (persistent across deploys)
+      - key: STORAGE_STRATEGY
+        value: supabase
+
+      - key: UPLOAD_MAX_SIZE_MB
+        value: "10"
+
+      # ── Rate Limiting ──────────────────────────────────────────────────────
+      - key: RATE_LIMIT_WINDOW_MS
+        value: "900000"
+
+      - key: RATE_LIMIT_MAX_REQUESTS
+        value: "100"
+
+      - key: AUTH_RATE_LIMIT_MAX
+        value: "10"

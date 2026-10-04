@@ -9,24 +9,10 @@
   'use strict';
 
   /* ── CONFIG ────────────────────────────────────────────────────────────── */
-  var API = (function () {
-    // If page is served from localhost:4000 (correct), use relative path
-    // If opened via file:// or a different port/origin, point to the backend explicitly
-    var loc = window.location;
-    if (loc.protocol === 'file:' || (loc.hostname === 'localhost' && loc.port !== '4000') || (loc.hostname !== 'localhost' && loc.hostname !== '127.0.0.1')) {
-      // Show a warning banner — must be opened via http://localhost:4000/admin/
-      document.addEventListener('DOMContentLoaded', function () {
-        var banner = document.createElement('div');
-        banner.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:99999;background:#7f1d1d;color:#fca5a5;padding:12px 20px;font-size:13px;font-weight:600;text-align:center;';
-        banner.innerHTML = '⚠️ Admin panel must be opened via the backend server. Open: <a href="http://localhost:4000/admin/" style="color:#fef2f2;text-decoration:underline;">http://localhost:4000/admin/</a> — not as a file.';
-        document.body.insertBefore(banner, document.body.firstChild);
-      });
-      return 'http://localhost:4000/api/v1';
-    }
-    // When served correctly, use the data-api attribute or relative path
-    var el = document.getElementById('admin-app');
-    return (el && el.dataset.api) || '/api/v1';
-  })();
+  // API base URL — Vercel rewrites /api/* → Render backend in production.
+  // Vite dev server proxies /api/* → localhost:4000 during local development.
+  var API = '/api/v1';
+
   var TOKEN_KEY = 'nch_admin_token';
   // Supabase config — anon key is safe to expose in frontend
   var SUPABASE_URL = 'https://rptvadjhblznngaoaaxn.supabase.co';

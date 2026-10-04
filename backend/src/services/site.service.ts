@@ -167,6 +167,13 @@ export async function updateCatalogue(id: string, data: Partial<Parameters<typeo
   return prisma.catalogue.update({ where: { id }, data, select: catalogueSelect });
 }
 
+export async function getCatalogueById(id: string) {
+  return prisma.catalogue.findUnique({
+    where: { id },
+    select: { id: true, fileUrl: true },
+  });
+}
+
 export async function deleteCatalogue(id: string) {
   const existing = await prisma.catalogue.findUnique({ where: { id }, select: { id: true } });
   if (!existing) throw AppError.notFound('Catalogue');
@@ -223,6 +230,13 @@ export async function updateShopMedia(
   const existing = await prisma.shopMedia.findUnique({ where: { id }, select: { id: true } });
   if (!existing) throw AppError.notFound('ShopMedia');
   return prisma.shopMedia.update({ where: { id }, data, select: shopMediaSelect });
+}
+
+export async function getShopMediaById(id: string) {
+  return prisma.shopMedia.findUnique({
+    where: { id },
+    select: { id: true, mediaUrl: true },
+  });
 }
 
 export async function deleteShopMedia(id: string) {
